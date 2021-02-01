@@ -1,0 +1,46 @@
+<div class="container main-container">
+
+    <h1>Lista IPTU</h1>
+    <hr>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    Data Vencimento
+                </th>
+                <th>
+                    Valor
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let iptu of iptus">
+                <td>
+                    {{ iptu.descricao }}
+                </td>
+                <td>
+                    {{ iptu.dataVencimento }}
+                </td>
+                <td>
+                    {{ iptu.valor | currencyBrazil }}
+                </td>
+                <td>
+                    <input [checked]="iptu.ativo" class="check-box" disabled="disabled" type="checkbox">
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" [routerLink]="['/cidadao/iptu-detalhe',iptu.id]">
+                        <span class="fa fa-search"></span>
+                    </a>&nbsp;                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
