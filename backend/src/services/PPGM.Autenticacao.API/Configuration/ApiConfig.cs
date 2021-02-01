@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NetDevPack.Security.JwtSigningCredentials.AspNetCore;
-using NSE.Identidade.API.Services;
-using NSE.WebAPI.Core.Identidade;
-using NSE.WebAPI.Core.Usuario;
+using PPGM.Autenticacao.API.Services;
+using PPGM.WebAPI.Core.Identidade;
+using PPGM.WebAPI.Core.Usuario;
 
 namespace PPGM.Autenticacao.API.Configuration
 {

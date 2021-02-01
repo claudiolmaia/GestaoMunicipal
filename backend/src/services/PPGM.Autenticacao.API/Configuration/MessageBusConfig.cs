@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NSE.Core.Utils;
-using NSE.MessageBus;
+using PPGM.Core.Utils;
+using PPGM.MessageBus;
 
 namespace PPGM.Autenticacao.API.Configuration
 {
