@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PPGM.Core.Communication;
 
-namespace NSE.WebAPI.Core.Controllers
+namespace PPGM.WebAPI.Core.Controllers
 {
     [ApiController]
     public abstract class MainController : Controller
