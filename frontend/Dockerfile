@@ -13,4 +13,6 @@ FROM nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=ng-builder /app/dist/front-end /usr/share/nginx/html
 
-EXPOSE 80
+#EXPOSE 80
+EXPOSE 5000
+EXPOSE 5001

@@ -7,13 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["./services/PPGM.Usuario.API/PPGM.Usuarios.API.csproj", "services/PPGM.Usuario.API/"]
+COPY ["./services/PPGM.Usuarios.API/PPGM.Usuarios.API.csproj", "services/PPGM.Usuarios.API/"]
 COPY ["./bulding-blocks/PPGM.Core/PPGM.Core.csproj", "bulding-blocks/PPGM.Core/"]
 COPY ["./bulding-blocks/PPGM.MessageBus/PPGM.MessageBus.csproj", "bulding-blocks/PPGM.MessageBus/"]
 COPY ["./bulding-blocks/PPGM.WebAPI.Core/PPGM.WebAPI.Core.csproj", "bulding-blocks/PPGM.WebAPI.Core/"]
-RUN dotnet restore "services/PPGM.Usuario.API/PPGM.Usuarios.API.csproj"
+RUN dotnet restore "services/PPGM.Usuarios.API/PPGM.Usuarios.API.csproj"
 COPY . .
-WORKDIR "services/PPGM.Usuario.API"
+WORKDIR "services/PPGM.Usuarios.API"
 RUN dotnet build "PPGM.Usuarios.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
