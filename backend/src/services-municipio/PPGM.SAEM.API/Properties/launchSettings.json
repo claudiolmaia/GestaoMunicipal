@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Start": {
+      "commandName": "ErrorProfile",
+      "ErrorString": "Unexpected character encountered while parsing value: h. Path 'iisSettings.iisExpress.applicationUrl', line 6, position 22."
+    },
+    "Self Hosting - Development": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:5301;http://localhost:5302"
+    }
+  }
+}

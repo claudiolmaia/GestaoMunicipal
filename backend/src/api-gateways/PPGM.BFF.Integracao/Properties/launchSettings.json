@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51729",
-      "sslPort": 44334
+      "applicationUrl": "http://localhost:59088",
+      "sslPort": 44314
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
@@ -12,28 +12,19 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "PPGM.Usuarios.API": {
+    "PPGM.BFF.Integracao": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:5201;http://localhost:5202"
-    },
-    "Selfhosting - Development": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:5201;http://localhost:5202"
+      "applicationUrl": "https://localhost:5901;http://localhost:5902"
     }
   }
 }

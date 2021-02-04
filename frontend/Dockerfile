@@ -10,9 +10,9 @@ RUN $(npm bin)/ng build --prod
 
 ### Subir o source para o servidor NGINX com a app Angular ###
 FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
+# COPY ./ppgm.pem /etc/nginx
+# COPY ./ppgm.key /etc/nginx
 COPY --from=ng-builder /app/dist/front-end /usr/share/nginx/html
 
-#EXPOSE 80
-EXPOSE 5000
-EXPOSE 5001
+EXPOSE 80

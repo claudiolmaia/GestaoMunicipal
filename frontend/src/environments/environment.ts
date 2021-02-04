@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrlv1: 'https://localhost:5001/api/v1/',
-  imagensUrl: 'https://localhost:5001/',
-  apiUrlIptu: 'https://localhost:5001/api/v1/'
+  apiUrlv1: 'https://localhost:5101/api/v1/',
+  imagensUrl: 'https://localhost:5101/',
+  apiUrlUsuario: 'https://localhost:5201/api/v1/',
+  apiUrlIntegracao: 'https://localhost:5301/api/v1/'
 };
 
 /*

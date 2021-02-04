@@ -8,8 +8,8 @@ services:
         environment:
             RABBITMQ_DEFAULT_USER: "ppgm"
             RABBITMQ_DEFAULT_PASS: "ppgm"
-        ports:
-            - "8081:15672"
+        # ports:
+        #     - "8081:15672"
 
     sql-server:
         image: ppgm/sql-server:latest
@@ -70,9 +70,12 @@ services:
         build:
             context: ../frontend
             dockerfile: ./Dockerfile
-        restart: always            
+        restart: always
         volumes: 
             - dpkeys:/var/data_protection_keys/         
+        ports:
+            - "8080:8080"
+            - "4443:443"
         depends_on:
             - api-auth
             - api-usuario            
