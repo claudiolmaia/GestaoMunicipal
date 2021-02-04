@@ -19,7 +19,8 @@ namespace PPGM.SAEM.API.Controllers
         }
 
         [HttpGet("consulta")]
-        public async Task<List<Consulta>> ObterPorCpf(string cpf)
+        public async Task<List<Consulta>> ObterPorCpf(string cpf
+            )
         {
             return await _consultaRepository.ObterPorCpf(cpf);
         }
