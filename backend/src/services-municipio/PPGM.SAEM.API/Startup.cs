@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PPGM.SAEM.API.Configuration;
-using PPGM.SAEM.API.Configuration;
 using PPGM.WebAPI.Core.Identidade;
 
 namespace PPGM.SAEM.API

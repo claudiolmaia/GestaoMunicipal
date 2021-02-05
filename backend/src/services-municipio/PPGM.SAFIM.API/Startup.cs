@@ -36,8 +36,10 @@ namespace PPGM.SAFIM.API
 
             services.AddSwaggerConfiguration();
 
-            //services.AddMessageBusConfiguration(Configuration);
             //services.RegisterServices();
+
+            //services.AddMessageBusConfiguration(Configuration);
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

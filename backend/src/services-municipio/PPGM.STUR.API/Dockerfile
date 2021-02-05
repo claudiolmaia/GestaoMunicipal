@@ -7,10 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["src/services-municipio/PPGM.STUR.API/PPGM.STUR.API.csproj", "src/services-municipio/PPGM.STUR.API/"]
-RUN dotnet restore "src/services-municipio/PPGM.STUR.API/PPGM.STUR.API.csproj"
+COPY ["./services-municipio/PPGM.STUR.API/PPGM.STUR.API.csproj", "services-municipio/PPGM.STUR.API/"]
+COPY ["./bulding-blocks/PPGM.Core/PPGM.Core.csproj", "bulding-blocks/PPGM.Core/"]
+COPY ["./bulding-blocks/PPGM.MessageBus/PPGM.MessageBus.csproj", "bulding-blocks/PPGM.MessageBus/"]
+COPY ["./bulding-blocks/PPGM.WebAPI.Core/PPGM.WebAPI.Core.csproj", "bulding-blocks/PPGM.WebAPI.Core/"]
+RUN dotnet restore "services-municipio/PPGM.STUR.API/PPGM.STUR.API.csproj"
 COPY . .
-WORKDIR "/src/src/services-municipio/PPGM.STUR.API"
+WORKDIR "services-municipio/PPGM.STUR.API"
 RUN dotnet build "PPGM.STUR.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

@@ -11,7 +11,9 @@ namespace PPGM.BFF.Integracao.Services
 {
     public interface ISaemService
     {
-
+        Task<AlunoDTO> ObterAlunoPorCpf(string cpf);
+        Task<AlunoDTO> ObterAlunoPorId(int id);
+        Task<List<AlunoDTO>> ObterTodosAlunos();
     }
     public class SaemService : Service, ISaemService
     {

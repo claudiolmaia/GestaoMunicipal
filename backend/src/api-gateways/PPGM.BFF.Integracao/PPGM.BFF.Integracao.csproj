@@ -13,10 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\bulding-blocks\PPGM.Core\PPGM.Core.csproj" />
+    <ProjectReference Include="..\..\bulding-blocks\PPGM.MessageBus\PPGM.MessageBus.csproj" />
     <ProjectReference Include="..\..\bulding-blocks\PPGM.WebAPI.Core\PPGM.WebAPI.Core.csproj" />
   </ItemGroup>
 

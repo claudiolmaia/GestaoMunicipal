@@ -7,10 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["src/services-municipio/PPGM.SAFIM.API/PPGM.SAFIM.API.csproj", "src/services-municipio/PPGM.SAFIM.API/"]
-RUN dotnet restore "src/services-municipio/PPGM.SAFIM.API/PPGM.SAFIM.API.csproj"
+COPY ["./services-municipio/PPGM.SAFIM.API/PPGM.SAFIM.API.csproj", "services-municipio/PPGM.SAFIM.API/"]
+COPY ["./bulding-blocks/PPGM.Core/PPGM.Core.csproj", "bulding-blocks/PPGM.Core/"]
+COPY ["./bulding-blocks/PPGM.MessageBus/PPGM.MessageBus.csproj", "bulding-blocks/PPGM.MessageBus/"]
+COPY ["./bulding-blocks/PPGM.WebAPI.Core/PPGM.WebAPI.Core.csproj", "bulding-blocks/PPGM.WebAPI.Core/"]
+RUN dotnet restore "services-municipio/PPGM.SAFIM.API/PPGM.SAFIM.API.csproj"
 COPY . .
-WORKDIR "/src/src/services-municipio/PPGM.SAFIM.API"
+WORKDIR "services-municipio/PPGM.SAFIM.API"
 RUN dotnet build "PPGM.SAFIM.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

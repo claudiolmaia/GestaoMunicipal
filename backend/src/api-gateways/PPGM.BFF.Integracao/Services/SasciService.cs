@@ -9,7 +9,7 @@ namespace PPGM.BFF.Integracao.Services
 {
     public interface ISasciService
     {
-
+        Task<ConsultaDTO> ObterConsultaPorCpf(string cpf);
     }
 
     public class SasciService: Service, ISasciService

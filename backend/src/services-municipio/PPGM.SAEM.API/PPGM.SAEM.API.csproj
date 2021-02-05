@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>bec327ca-8df2-406c-a783-42ec2e241bd2</UserSecretsId>
+    <UserSecretsId>1648b05a-e0e0-49a0-b7d5-cf715aa392c6</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
   </PropertyGroup>
@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\bulding-blocks\PPGM.Core\PPGM.Core.csproj" />
+    <ProjectReference Include="..\..\bulding-blocks\PPGM.MessageBus\PPGM.MessageBus.csproj" />
     <ProjectReference Include="..\..\bulding-blocks\PPGM.WebAPI.Core\PPGM.WebAPI.Core.csproj" />
   </ItemGroup>
 
