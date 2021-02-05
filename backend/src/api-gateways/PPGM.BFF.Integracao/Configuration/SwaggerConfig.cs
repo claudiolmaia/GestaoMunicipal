@@ -13,9 +13,9 @@ namespace PPGM.BFF.Integracao.Configuration.Configuration
             {
                 c.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "Gestao Municipal BFF Integracao API",
+                    Title = "Gestao Municipal Integração API",
                     Description = "API Criada como POC Obrigatorio para a formação de Arquitetura de Software PUC Minas.",
-                    Contact = new OpenApiContact() { Name = "Cláudio Lúcio Maia", Email = "claudioluciomaia@gmai.com" },
+                    Contact = new OpenApiContact() { Name = "Eduardo Pires", Email = "contato@desenvolvedor.io" },
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                 });
 

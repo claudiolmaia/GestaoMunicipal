@@ -1,10 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PPGM.BFF.Integracao.Models;
 using PPGM.BFF.Integracao.Services;
 using PPGM.WebAPI.Core.Controllers;
-using System.Threading.Tasks;
 
 namespace PPGM.BFF.Integracao.Controllers
 {
+    [Authorize]
     public class AlunoController : MainController
     {
         private readonly ISaemService _saemService;
@@ -14,15 +20,13 @@ namespace PPGM.BFF.Integracao.Controllers
             _saemService = saemService;
         }
 
-        [HttpGet]
-        [Route("integracao/aluno")]
+        [HttpGet("integracao/aluno")]
         public async Task<IActionResult> ObterTodos()
         {
             return CustomResponse(await _saemService.ObterTodosAlunos());
         }
 
-        [HttpGet]
-        [Route("integracao/aluno/{cpf}")]
+        [HttpGet("integracao/aluno/{cpf}")]
         public async Task<IActionResult> ObterPorCpf(string cpf)
         {
             return CustomResponse(await _saemService.ObterAlunoPorCpf(cpf));

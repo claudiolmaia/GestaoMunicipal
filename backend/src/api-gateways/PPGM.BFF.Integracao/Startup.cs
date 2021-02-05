@@ -12,6 +12,7 @@ namespace PPGM.BFF.Integracao
     public class Startup
     {
         public IConfiguration Configuration { get; }
+
         public Startup(IHostEnvironment hostEnvironment)
         {
             var builder = new ConfigurationBuilder()
@@ -27,7 +28,6 @@ namespace PPGM.BFF.Integracao
 
             Configuration = builder.Build();
         }
-        
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -41,7 +41,7 @@ namespace PPGM.BFF.Integracao
 
             services.AddMessageBusConfiguration(Configuration);
 
-            // services.ConfigureGrpcServices(Configuration);
+            //services.ConfigureGrpcServices(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

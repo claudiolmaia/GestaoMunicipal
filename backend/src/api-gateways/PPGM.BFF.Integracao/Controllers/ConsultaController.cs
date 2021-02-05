@@ -1,10 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PPGM.BFF.Integracao.Models;
 using PPGM.BFF.Integracao.Services;
 using PPGM.WebAPI.Core.Controllers;
-using System.Threading.Tasks;
+
 
 namespace PPGM.BFF.Integracao.Controllers
 {
+    [Authorize]
     public class ConsultaController : MainController
     {
         private readonly ISasciService _sasciService;
@@ -14,8 +21,7 @@ namespace PPGM.BFF.Integracao.Controllers
             _sasciService = sasciService;
         }
 
-        [HttpGet]
-        [Route("integracao/aluno/{cpf}")]
+        [HttpGet("integracao/consulta/{cpf}")]
         public async Task<IActionResult> ObterPorCpf(string cpf)
         {
             return CustomResponse(await _sasciService.ObterConsultaPorCpf(cpf));

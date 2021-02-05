@@ -15,8 +15,7 @@ namespace PPGM.BFF.Integracao.Controllers
             _sturService = sturService;
         }
 
-        [HttpGet]
-        [Route("integracao/iptu/{cpf}")]
+        [HttpGet("integracao/iptu/{cpf}")]        
         public async Task<IActionResult> ObterPorCpf(string cpf)
         {
             return CustomResponse(await _sturService.ObterIptuPorCpf(cpf));

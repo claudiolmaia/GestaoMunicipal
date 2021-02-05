@@ -8,15 +8,18 @@ services:
         environment:
             RABBITMQ_DEFAULT_USER: "ppgm"
             RABBITMQ_DEFAULT_PASS: "ppgm"
-        # ports:
-        #     - "8081:15672"
+        ports:
+            - "15672:15672"
+            - "5672:5672"            
 
     sql-server:
         image: ppgm/sql-server:latest
         container_name: ppgm-sql-server
         build: 
-            context: ../sql
+            context: ./sql
             dockerfile: ./Dockerfile
+        ports:
+            - "1433:1433"
         environment:
             SA_PASSWORD: "@ppgm2021"
             ACCEPT_EULA: "Y"     
@@ -34,7 +37,10 @@ services:
             - ASPNETCORE_Kestrel__Certificates__Default__Password=ppgm
             - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/ppgm-cert.pfx
         volumes:
-            - ./certs:/https:ro   
+            - ./certs:/https:ro
+        ports:
+            - "5101:80"
+            - "5102:443"
         depends_on:
             - rabbitmq
             - sql-server
@@ -53,6 +59,9 @@ services:
             - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/ppgm-cert.pfx
         volumes:
             - ./certs:/https:ro
+        ports:
+            - "5201:5201"
+            - "5202:5202"
         depends_on:
             - rabbitmq
             - sql-server
@@ -72,6 +81,9 @@ services:
             - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/ppgm-cert.pfx
         volumes:
             - ./certs:/https:ro
+        ports:
+            - "5301:5301"
+            - "5302:5302"
         depends_on:
             - rabbitmq            
             - api-auth
@@ -90,6 +102,9 @@ services:
             - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/ppgm-cert.pfx
         volumes:
             - ./certs:/https:ro
+        ports:
+            - "5401:5401"
+            - "5402:5402"
         depends_on:
             - rabbitmq            
             - api-auth
@@ -108,6 +123,9 @@ services:
             - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/ppgm-cert.pfx
         volumes:
             - ./certs:/https:ro
+        ports:
+            - "5501:5501"
+            - "5502:5502"
         depends_on:
             - rabbitmq            
             - api-auth
@@ -121,11 +139,14 @@ services:
         restart: always 
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
-            - ASPNETCORE_URLS=https://+:5501;http://+5502
+            - ASPNETCORE_URLS=https://+:5601;http://+5602
             - ASPNETCORE_Kestrel__Certificates__Default__Password=ppgm
             - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/ppgm-cert.pfx
         volumes:
             - ./certs:/https:ro
+        ports:
+            - "5601:5601"
+            - "5602:5602"
         depends_on:
             - rabbitmq            
             - api-auth
@@ -144,6 +165,9 @@ services:
             - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/ppgm-cert.pfx
         volumes:
             - ./certs:/https:ro
+        ports:
+            - "5901:80"
+            - "5902:443"
         depends_on:
             - rabbitmq            
             - api-auth
@@ -161,8 +185,8 @@ services:
             dockerfile: ./nginx/Dockerfile 
         restart: always 
         ports:
-            - "80:80"
-            - "443:443"
+            - "3000:80"
+            - "3001:443"
         depends_on:
             - api-bff-integracao
 
@@ -176,8 +200,8 @@ services:
         volumes: 
             - dpkeys:/var/data_protection_keys/         
         ports:
-            - "8081:8888"
-            - "4443:443"
+            - "80:80"
+            - "443:443"
         depends_on:
             - api-auth
             - api-usuario            
