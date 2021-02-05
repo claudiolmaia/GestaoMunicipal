@@ -13,7 +13,7 @@ export class CidadaoService extends BaseService {
 
     obterIptuPorCidadao(): Observable<Iptu[]> {
         return this.http
-            .get<Iptu[]>(this.UrlServiceV1 + "cidadao", super.ObterAuthHeaderJson())
+            .get<Iptu[]>(this.UrlIntegracaoV1 + "integracao/iptu", super.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 }
