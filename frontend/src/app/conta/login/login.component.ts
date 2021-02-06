@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'ngx-custom-validators';
 import { ToastrService } from 'ngx-toastr';
 
-import { Usuario } from '../models/usuario';
+import { UsuarioLogin } from '../models/usuario-login';
 import { ContaService } from '../services/conta.service';
 import { FormBaseComponent } from 'src/app/base-components/form-base.component';
 
@@ -20,7 +20,7 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
 
   errors: any[] = [];
   loginForm: FormGroup;
-  usuario: Usuario;
+  usuario: UsuarioLogin;
 
   returnUrl: string;
 
@@ -37,7 +37,7 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
         required: 'Informe o e-mail',
         email: 'Email inválido'
       },
-      password: {
+      senha: {
         required: 'Informe a senha',
         rangeLength: 'A senha deve possuir entre 6 e 15 caracteres'
       }
@@ -52,7 +52,7 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, CustomValidators.rangeLength([6, 15])]]
+      senha: ['', [Validators.required, CustomValidators.rangeLength([6, 15])]]
     });
   }
 

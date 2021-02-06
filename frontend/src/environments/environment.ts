@@ -4,13 +4,14 @@
 
 export const environment = {
   production: false,
-  apiUrlv1: 'https://localhost:5901/api/v1/',
-  apiUrlAutenticacao: 'https://localhost:5101/api/v1/',
-  imagensUrl: 'https://localhost:5901/',  
-  apiUrlIntegracao: 'https://localhost:5901/api/v1/'
+  apiUrlv1: 'http://localhost:5901/api/',
+  apiUrlAutenticacao: 'https://localhost:5101/api/',
+  imagensUrl: 'http://localhost:5901/',  
+  apiUrlIntegracao: 'http://localhost/api/'
 };
 
 /*
+
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *

@@ -12,18 +12,6 @@ services:
             - "15672:15672"
             - "5672:5672"            
 
-    sql-server:
-        image: ppgm/sql-server:latest
-        container_name: ppgm-sql-server
-        build: 
-            context: ./sql
-            dockerfile: ./Dockerfile
-        ports:
-            - "1433:1433"
-        environment:
-            SA_PASSWORD: "@ppgm2021"
-            ACCEPT_EULA: "Y"     
-
     api-auth:
         image: ppgm/auth:latest
         container_name: ppgm-api-autenticacao
@@ -39,11 +27,10 @@ services:
         volumes:
             - ./certs:/https:ro
         ports:
-            - "5101:80"
-            - "5102:443"
+            - "5101:5101"
+            - "5102:5102"
         depends_on:
-            - rabbitmq
-            - sql-server
+            - rabbitmq        
 
     api-usuario:
         image: ppgm/api-usuario:latest
@@ -60,11 +47,10 @@ services:
         volumes:
             - ./certs:/https:ro
         ports:
-            - "5201:5201"
+            - "5201:5202"
             - "5202:5202"
         depends_on:
-            - rabbitmq
-            - sql-server
+            - rabbitmq            
             - api-auth
 
     api-saem:
@@ -85,7 +71,6 @@ services:
             - "5301:5301"
             - "5302:5302"
         depends_on:
-            - rabbitmq            
             - api-auth
 
     api-safim:
@@ -106,7 +91,6 @@ services:
             - "5401:5401"
             - "5402:5402"
         depends_on:
-            - rabbitmq            
             - api-auth
 
     api-sasci:
@@ -127,7 +111,6 @@ services:
             - "5501:5501"
             - "5502:5502"
         depends_on:
-            - rabbitmq            
             - api-auth
 
     api-stur:
@@ -148,7 +131,6 @@ services:
             - "5601:5601"
             - "5602:5602"
         depends_on:
-            - rabbitmq            
             - api-auth
 
     api-bff-integracao:
@@ -166,10 +148,9 @@ services:
         volumes:
             - ./certs:/https:ro
         ports:
-            - "5901:80"
-            - "5902:443"
+            - "5901:5901"
+            - "5902:5901"
         depends_on:
-            - rabbitmq            
             - api-auth
             - api-saem
             - api-safim
@@ -185,8 +166,8 @@ services:
             dockerfile: ./nginx/Dockerfile 
         restart: always 
         ports:
-            - "3000:80"
-            - "3001:443"
+            - "3000:443"
+            - "3001:80"
         depends_on:
             - api-bff-integracao
 

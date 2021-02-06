@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -9,7 +10,7 @@ namespace PPGM.BFF.Integracao.Services
 {
     public interface ISturService
     {
-        Task<IptuDTO> ObterIptuPorCpf(string cpf);
+        Task<List<IptuDTO>> ObterIptuPorCpf(string cpf);
     }
 
     public class SturService : Service, ISturService
@@ -22,13 +23,13 @@ namespace PPGM.BFF.Integracao.Services
             _httpClient.BaseAddress = new Uri(settings.Value.SturUrl);
         }
 
-        public async Task<IptuDTO> ObterIptuPorCpf(string cpf)
+        public async Task<List<IptuDTO>> ObterIptuPorCpf(string cpf)
         {
-            var response = await _httpClient.GetAsync($"/iptu/{cpf}");
+            var response = await _httpClient.GetAsync($"/iptu/?cpf={cpf}");
 
             TratarErrosResponse(response);
 
-            return await DeserializarObjetoResponse<IptuDTO>(response);
+            return await DeserializarObjetoResponse<List<IptuDTO>>(response);
         }
     }
 }

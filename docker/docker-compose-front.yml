@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+
+    ppgm-web:
+        image: ppgm/web:latest
+        container_name: ppgm-web
+        build:
+            context: ../frontend
+            dockerfile: ./Dockerfile
+        restart: always
+        volumes: 
+            - dpkeys:/var/data_protection_keys/         
+        ports:
+            - "80:80"
+            - "443:443"        
+
+    
+volumes:
+    dpkeys:   

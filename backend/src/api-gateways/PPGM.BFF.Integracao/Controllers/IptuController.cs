@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPGM.BFF.Integracao.Controllers
 {
-    [Authorize]
+    
     public class IptuController : MainController
     {
         private readonly ISturService _sturService;

@@ -7,13 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["./services/PPGM.Autenticacao.API/PPGM.Autenticacao.API.csproj", "services/PPGM.Autenticacao.API/"]
-COPY ["./bulding-blocks/PPGM.Core/PPGM.Core.csproj", "bulding-blocks/PPGM.Core/"]
-COPY ["./bulding-blocks/PPGM.MessageBus/PPGM.MessageBus.csproj", "bulding-blocks/PPGM.MessageBus/"]
-COPY ["./bulding-blocks/PPGM.WebAPI.Core/PPGM.WebAPI.Core.csproj", "bulding-blocks/PPGM.WebAPI.Core/"]
-RUN dotnet restore "services/PPGM.Autenticacao.API/PPGM.Autenticacao.API.csproj"
+COPY ["PPGM.Autenticacao.API.csproj", "src/services/PPGM.Autenticacao.API/"]
+COPY ["src/bulding-blocks/PPGM.Core/PPGM.Core.csproj", "src/bulding-blocks/PPGM.Core/"]
+COPY ["src/bulding-blocks/PPGM.MessageBus/PPGM.MessageBus.csproj", "src/bulding-blocks/PPGM.MessageBus/"]
+COPY ["src/bulding-blocks/PPGM.WebAPI.Core/PPGM.WebAPI.Core.csproj", "src/bulding-blocks/PPGM.WebAPI.Core/"]
+RUN dotnet restore "src/services/PPGM.Autenticacao.API/PPGM.Autenticacao.API.csproj"
 COPY . .
-WORKDIR "services/PPGM.Autenticacao.API"
+WORKDIR "/src/src/services/PPGM.Autenticacao.API"
 RUN dotnet build "PPGM.Autenticacao.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

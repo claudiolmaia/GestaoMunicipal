@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+
+    api-auth:
+        image: ppgm/auth:latest
+        container_name: ppgm-api-autenticacao
+        build: 
+            context: ../backend/src
+            dockerfile: ./services/PPGM.Autenticacao.API/Dockerfile  
+        restart: always    
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:5101;http://+5102
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=ppgm
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/ppgm-cert.pfx
+        volumes:
+            - ./certs:/https:ro
+        ports:
+            - "5101:80"
+            - "5102:443"
+
+    api-usuario:
+        image: ppgm/api-usuario:latest
+        container_name: ppgm-api-usuario
+        build: 
+            context: ../backend/src
+            dockerfile: ./services/PPGM.Usuarios.API/Dockerfile
+        restart: always 
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:5201;http://+5202
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=ppgm
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/ppgm-cert.pfx
+        volumes:
+            - ./certs:/https:ro
+        ports:
+            - "5201:5201"
+            - "5202:5202"
+        depends_on:
+            - api-auth

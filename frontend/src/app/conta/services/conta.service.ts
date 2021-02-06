@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
+import { UsuarioLogin } from '../models/usuario-login';
 
 import { Observable } from 'rxjs';
 import { catchError, map } from "rxjs/operators";
@@ -13,7 +14,7 @@ export class ContaService extends BaseService {
 
     registrarUsuario(usuario: Usuario): Observable<Usuario> {
         let response = this.http
-            .post(this.UrlServiceV1 + 'nova-conta', usuario, this.ObterHeaderJson())
+            .post(this.UrlAutenticacaoV1 + 'autenticacao/nova-conta', usuario, this.ObterHeaderJson())
             .pipe(
                 map(this.extractData),
                 catchError(this.serviceError));
@@ -21,9 +22,9 @@ export class ContaService extends BaseService {
         return response;
     }
 
-    login(usuario: Usuario): Observable<Usuario> {
+    login(usuario: UsuarioLogin): Observable<Usuario> {
         let response = this.http
-            .post(this.UrlServiceV1 + 'entrar', usuario, this.ObterHeaderJson())
+            .post(this.UrlAutenticacaoV1 + 'autenticacao/autenticar', usuario, this.ObterHeaderJson())
             .pipe(
                 map(this.extractData),
                 catchError(this.serviceError));
