@@ -13,6 +13,16 @@ namespace PPGM.Autenticacao.API.Configuration
     {
         public static IServiceCollection AddApiConfiguration(this IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Total",
+                    builder =>
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
+            });
+
             services.AddControllers();
 
             services.AddScoped<AuthenticationService>();
@@ -31,6 +41,8 @@ namespace PPGM.Autenticacao.API.Configuration
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("Total");
 
             app.UseAuthConfiguration();
 

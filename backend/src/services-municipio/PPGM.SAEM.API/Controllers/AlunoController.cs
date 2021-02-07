@@ -11,7 +11,7 @@ namespace PPGM.SAEM.API.Controllers
     public class AlunoController : MainController
     {
         private readonly IAlunoRepository _alunoRepository;
-        public AlunoController(IAlunoRepository alunoRepository)
+        public AlunoController(IAlunoRepository alunoRepository)    
         {
             _alunoRepository = alunoRepository;
         }

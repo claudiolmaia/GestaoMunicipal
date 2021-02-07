@@ -1,29 +1,39 @@
 export class LocalStorageUtils {
     
     public obterUsuario() {
-        return JSON.parse(localStorage.getItem('devio.user'));
+        return JSON.parse(localStorage.getItem('ppgm.user'));
     }
 
     public salvarDadosLocaisUsuario(response: any) {
         this.salvarTokenUsuario(response.accessToken);
-        this.salvarUsuario(response.userToken);
+        this.salvarUsuario(response.usuarioToken);
+        this.salvarRefreshToken(response.refreshToken);
     }
 
     public limparDadosLocaisUsuario() {
-        localStorage.removeItem('devio.token');
-        localStorage.removeItem('devio.user');
+        localStorage.removeItem('ppgm.token');
+        localStorage.removeItem('ppgm.rt');
+        localStorage.removeItem('ppgm.user');
     }
 
     public obterTokenUsuario(): string {
-        return localStorage.getItem('devio.token');
+        return localStorage.getItem('ppgm.token');
+    }
+
+    public obterRefreshTokenUsuario(): string {
+        return localStorage.getItem('ppgm.rt');
     }
 
     public salvarTokenUsuario(token: string) {
-        localStorage.setItem('devio.token', token);
+        localStorage.setItem('ppgm.token', token);        
     }
 
     public salvarUsuario(user: string) {
-        localStorage.setItem('devio.user', JSON.stringify(user));
+        localStorage.setItem('ppgm.user', JSON.stringify(user));
+    }
+
+    public salvarRefreshToken(rt: string) {
+        localStorage.setItem('ppgm.rt', JSON.stringify(rt));
     }
 
 }

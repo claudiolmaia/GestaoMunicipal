@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPGM.STUR.API", "src\servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPGM.SAEM.API", "src\services-municipio\PPGM.SAEM.API\PPGM.SAEM.API.csproj", "{A65900BB-DFF0-4A2C-819B-7B30B4C487A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPGM.BFF.Integracao", "src\api-gateways\PPGM.BFF.Integracao\PPGM.BFF.Integracao.csproj", "{DF5DB0B2-FF48-4E85-A1D8-59DC370D488A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPGM.BFF.Integracao", "src\api-gateways\PPGM.BFF.Integracao\PPGM.BFF.Integracao.csproj", "{DF5DB0B2-FF48-4E85-A1D8-59DC370D488A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

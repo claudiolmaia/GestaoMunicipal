@@ -89,6 +89,7 @@ namespace PPGM.Autenticacao.API.Services
             var token = tokenHandler.CreateToken(new SecurityTokenDescriptor
             {
                 Issuer = currentIssuer,
+
                 Subject = identityClaims,
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = key

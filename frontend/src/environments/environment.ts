@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrlv1: 'http://localhost:5901/api/',
+  apiUrlv1: 'https://localhost:5901/api/',
   apiUrlAutenticacao: 'https://localhost:5101/api/',
-  imagensUrl: 'http://localhost:5901/',  
-  apiUrlIntegracao: 'http://localhost/api/'
+  imagensUrl: 'https://localhost:5901/',  
+  apiUrlIntegracao: 'https://localhost:5901/'
 };
 
 /*

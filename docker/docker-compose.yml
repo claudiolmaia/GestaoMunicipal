@@ -149,7 +149,7 @@ services:
             - ./certs:/https:ro
         ports:
             - "5901:5901"
-            - "5902:5901"
+            - "5902:5902"
         depends_on:
             - api-auth
             - api-saem
