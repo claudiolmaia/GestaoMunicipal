@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Iptu } from '../models/iptu';
 import { CidadaoService } from '../services/cidadao.service';
 import { environment } from 'src/environments/environment';
+import { Router } from "@angular/router";
+
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista',
@@ -14,12 +17,20 @@ export class ListaComponent implements OnInit {
   public iptus: Iptu[];
   errorMessage: string;
 
-  constructor(private cidadaoService: CidadaoService) { }
+  constructor(private cidadaoService: CidadaoService, 
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.cidadaoService.obterIptuPorCidadao()
       .subscribe(
         iptus => this.iptus = iptus,
-        error => this.errorMessage);
+        error => {this.processarFalha(error)});
   }
+
+  processarFalha(fail: any){
+
+    this.toastr.error('Ocorreu um erro!', 'Erro');
+  }
+
 }

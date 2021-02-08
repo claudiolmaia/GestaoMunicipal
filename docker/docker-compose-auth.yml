@@ -6,7 +6,7 @@ services:
         image: ppgm/auth:latest
         container_name: ppgm-api-autenticacao
         build: 
-            context: ../backend/src
+            context: ../src
             dockerfile: ./services/PPGM.Autenticacao.API/Dockerfile  
         restart: always    
         environment: 
@@ -24,7 +24,7 @@ services:
         image: ppgm/api-usuario:latest
         container_name: ppgm-api-usuario
         build: 
-            context: ../backend/src
+            context: ../src
             dockerfile: ./services/PPGM.Usuarios.API/Dockerfile
         restart: always 
         environment: 
