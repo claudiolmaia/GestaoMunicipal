@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+
+    ppgm-sql-server:
+        image: ppgm/sql-server:latest
+        container_name: ppgm-sql-server
+        build: 
+            context: ../sql/sqlserver
+            dockerfile: ./Dockerfile
+        environment:
+            SA_PASSWORD: "@ppgm2021"
+            ACCEPT_EULA: "Y"
+        ports:
+            - "1433:1433"
+
+    ppgm-mysql:
+        image: ppgm/mysql:latest
+        container_name: ppgm-mysql
+        build: 
+            context: ../sql/mysql
+            dockerfile: ./Dockerfile
+        environment:
+            MYSQL_ROOT_PASSWORD: "@ppgm2021"
+            # MYSQL_DATABASE: PPGM
+            # MYSQL_USER: "sa"
+            # MYSQL_PASSWORD: "@ppgm2021"
+        ports: 
+            - "3306:3306"
+    
+    ppgm-adminer:
+        image: adminer:latest
+        container_name: ppgm-adminer
+        ports:
+            - 9001:8080
+        links:
+            - ppgm-mysql
+
+    ppgm-redis:
+        image: redis:latest
+        container_name: ppgm-redis
+        command: redis-server --requirepass @ppgm2021
+        ports:
+            - "6379:6379"
+
+    ppgm-redis-commander:
+        container_name: ppgm-redis-commander
+        hostname: redis-commander
+        image: rediscommander/redis-commander:latest
+        restart: always
+        environment:
+            - REDIS_HOSTS=local:ppgm-redis:6379:0:@ppgm2021
+        ports:
+            - "8083:8081"
+
+    ppgm-
