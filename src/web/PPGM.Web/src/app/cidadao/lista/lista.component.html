@@ -1,46 +1,43 @@
 <div class="container main-container">
 
-    <h1>Lista IPTU</h1>
+    <h1>Portal Cidadão</h1>
     <hr>
 
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>
-                    Descrição
-                </th>
-                <th>
-                    Data Vencimento
-                </th>
-                <th>
-                    Valor
-                </th>
-                <th>
-                    Status
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let iptu of iptus">
-                <td>
-                    {{ iptu.descricao }}
-                </td>
-                <td>
-                    {{ iptu.dataVencimento }}
-                </td>
-                <td>
-                    {{ iptu.valor }}
-                </td>
-                <td>
-                    <input [checked]="iptu.ativo" class="check-box" disabled="disabled" type="checkbox">
-                </td>
-                <td class="text-right">
-                    <a class="btn btn-warning" [routerLink]="['/cidadao/iptu-detalhe',iptu.id]">
-                        <span class="fa fa-search"></span>
-                    </a>&nbsp;                    
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row text-center">
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="/assets/home.svg" height="164px" width="253px" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">IPTU</h4>
+                </div>
+                <div class="card-footer">
+                    <a href="/cidadao/iptu" class="btn btn-primary">Abrir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="/assets/medical.svg" height="164px" width="253px" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">Consulta Médica</h4>                    
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Abrir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="/assets/personal-card.svg" height="164px" width="253px" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">Dados Pessoais</h4>                    
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Abrir</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

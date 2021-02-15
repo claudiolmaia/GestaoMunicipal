@@ -6,8 +6,8 @@ services:
         image: ppgm/web:latest
         container_name: ppgm-web
         build:
-            context: ../src
-            dockerfile: ./web/PPGM.Web/Dockerfile
+            context: ../src/web/PPGM.Web/
+            dockerfile: ./Dockerfile
         restart: always
         volumes: 
             - dpkeys:/var/data_protection_keys/         

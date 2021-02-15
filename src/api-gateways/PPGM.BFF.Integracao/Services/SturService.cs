@@ -25,7 +25,7 @@ namespace PPGM.BFF.Integracao.Services
 
         public async Task<List<IptuDTO>> ObterIptuPorCpf(string cpf)
         {
-            var response = await _httpClient.GetAsync($"/iptu/?cpf={cpf}");
+            var response = await _httpClient.GetAsync($"/iptu/{cpf}");
 
             TratarErrosResponse(response);
 

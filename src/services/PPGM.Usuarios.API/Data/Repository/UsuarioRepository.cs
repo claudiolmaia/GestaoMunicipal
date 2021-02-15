@@ -4,6 +4,7 @@ using PPGM.Core.Data;
 using PPGM.Usuarios.API.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace PPGM.Usuarios.API.Data.Repository
 {
@@ -26,6 +27,11 @@ namespace PPGM.Usuarios.API.Data.Repository
         public Task<Usuario> ObterPorCpf(string cpf)
         {
             return _context.Usuarios.FirstOrDefaultAsync(c => c.Cpf.Numero == cpf);
+        }
+
+        public Task<Usuario> ObterUsuarioById(Guid userId)
+        {
+            return _context.Usuarios.FirstOrDefaultAsync(c => c.Id == userId);
         }
 
         public void Adicionar(Usuario usuario)

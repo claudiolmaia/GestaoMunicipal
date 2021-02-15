@@ -69,6 +69,7 @@ namespace NSE.Identidade.API.Controllers
 
             if (result.Succeeded)
             {
+                
                 return CustomResponse(await _authenticationService.GerarJwt(usuarioLogin.Email));
             }
 

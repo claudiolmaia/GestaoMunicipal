@@ -16,6 +16,12 @@ namespace PPGM.BFF.Integracao.Configuration
 
             services.Configure<AppServicesSettings>(configuration);
 
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = configuration.GetConnectionString("RedisConnection");
+                options.InstanceName = "BFF-Integracao-";
+            });
+
             services.AddCors(options =>
             {
                 options.AddPolicy("Total",

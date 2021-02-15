@@ -11,9 +11,9 @@ export class CidadaoService extends BaseService {
 
     constructor(private http: HttpClient) { super(); }
 
-    obterIptuPorCidadao(): Observable<Iptu[]> {
+    obterIptuPorCidadao(id: string): Observable<Iptu[]> {
         return this.http
-            .get<Iptu[]>(this.UrlIntegracaoV1 + "integracao/iptu", super.ObterAuthHeaderJson())
+            .get<Iptu[]>(`${this.UrlIntegracaoV1}integracao/iptu/${id}`, super.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 }

@@ -47,7 +47,7 @@ services:
         volumes:
             - ./certs:/https:ro
         ports:
-            - "5201:5202"
+            - "5201:5201"
             - "5202:5202"
         depends_on:
             - rabbitmq            
@@ -175,8 +175,8 @@ services:
         image: ppgm/web:latest
         container_name: ppgm-web
         build:
-            context: ../src/
-            dockerfile: ./web/PPGM.Web/Dockerfile
+            context: ../src/web/PPGM.Web/
+            dockerfile: ./Dockerfile
         restart: always
         volumes: 
             - dpkeys:/var/data_protection_keys/         

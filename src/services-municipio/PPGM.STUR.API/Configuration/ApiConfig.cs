@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PPGM.STUR.API.Data;
 using PPGM.WebAPI.Core.Identidade;
 
 namespace PPGM.STUR.API.Configuration
@@ -11,6 +13,9 @@ namespace PPGM.STUR.API.Configuration
     {
         public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<SturContext>(options =>
+                options.UseMySql(configuration.GetConnectionString("MySqlConnection")));
+
             services.AddControllers();
 
             services.AddCors(options =>

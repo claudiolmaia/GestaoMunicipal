@@ -24,6 +24,17 @@ export class LocalStorageUtils {
         return localStorage.getItem('ppgm.rt');
     }
 
+    public usuarioLogado() {
+        let usuario =  JSON.parse(localStorage.getItem('ppgm.user'));
+
+        for(var key in usuario) {
+            if(usuario.hasOwnProperty(key))
+                return true;
+        }
+
+        return false;
+    }
+
     public salvarTokenUsuario(token: string) {
         localStorage.setItem('ppgm.token', token);        
     }

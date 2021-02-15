@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PPGM.STUR.API.Data;
+using PPGM.STUR.API.Data.Repository;
 using PPGM.STUR.API.Models;
 
 namespace PPGM.STUR.API.Configuration

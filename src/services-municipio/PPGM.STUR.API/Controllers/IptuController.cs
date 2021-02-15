@@ -15,9 +15,8 @@ namespace PPGM.STUR.API.Controllers
             _iptuRepository = iptuRepository;
         }
 
-        [HttpGet("iptu")]
-        public async Task<List<Iptu>> ObterPorCpf(string cpf
-            )
+        [HttpGet("iptu/{cpf}")]
+        public async Task<List<Iptu>> ObterPorCpf(string cpf)
         {
             return await _iptuRepository.ObterPorCpf(cpf);
         }

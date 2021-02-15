@@ -8,9 +8,9 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista',
-  templateUrl: './lista.component.html'
+  templateUrl: './iptu.component.html'
 })
-export class ListaComponent implements OnInit {
+export class IptuComponent implements OnInit {
 
   imagens: string = environment.imagensUrl;
 
@@ -22,10 +22,16 @@ export class ListaComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    if(!this.cidadaoService.LocalStorage.usuarioLogado()) {
-      this.toastr.warning('Acesso apenas para usuários autenticados!', 'Alerta');
-      this.router.navigate(["/conta/login"]);
-    }
+    let user = this.cidadaoService.LocalStorage.obterUsuario();
+    let id = user.claims.find(e=> e.type == 'sub')?.value;
+    this.cidadaoService.obterIptuPorCidadao(id)
+      .subscribe(
+        iptus => this.iptus = iptus,
+        error => {this.processarFalha(error)});
   }
-  
+
+  processarFalha(fail: any){
+    this.toastr.error('Ocorreu um erro!', 'Erro');
+  }
+
 }
