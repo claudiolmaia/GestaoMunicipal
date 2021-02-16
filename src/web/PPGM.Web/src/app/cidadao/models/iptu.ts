@@ -1,12 +1,12 @@
 export interface Iptu {
-    id: string,
-    exercicio: string,
-    logradouro: string,
-    bairro:string,
-    cep: string,
-    cidade: string,
-    uf: string,
-    valor: number,
-    dataVencimento: string,
-    isPago: true    
+    Id: string,
+    Exercicio: string,
+    Logradouro: string,
+    Bairro:string,
+    CEP: string,
+    Cidade: string,
+    UF: string,
+    Valor: number,
+    DataVencimento: string,
+    IsPago: boolean    
   }

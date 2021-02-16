@@ -24,16 +24,16 @@
         <tbody>
             <tr *ngFor="let iptu of iptus">
                 <td>
-                    {{ iptu.descricao }}
+                    {{ iptu.Logradouro }}
                 </td>
                 <td>
-                    {{ iptu.dataVencimento }}
+                    {{ iptu.DataVencimento }}
                 </td>
                 <td>
-                    {{ iptu.valor }}
+                    {{ iptu.Valor }}
                 </td>
                 <td>
-                    <input [checked]="iptu.ativo" class="check-box" disabled="disabled" type="checkbox">
+                    <input [checked]="iptu.IsPago" class="check-box" disabled="disabled" type="checkbox">
                 </td>
                 <td class="text-right">
                     <!-- <a class="btn btn-warning" [routerLink]="['/cidadao/iptu/iptu-detalhe',iptu.id]">
