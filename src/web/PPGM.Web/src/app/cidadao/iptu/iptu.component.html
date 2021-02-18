@@ -33,12 +33,14 @@
                     {{ iptu.Valor }}
                 </td>
                 <td>
-                    <input [checked]="iptu.IsPago" class="check-box" disabled="disabled" type="checkbox">
+                    <span>{{iptu.IsPago ? 'Pago' : 'Em Aberto'}}</span>
+                    <!-- <input [checked]="iptu.IsPago" class="check-box" disabled="disabled" type="checkbox"> -->
                 </td>
-                <td class="text-right">
-                    <!-- <a class="btn btn-warning" [routerLink]="['/cidadao/iptu/iptu-detalhe',iptu.id]">
-                        <span class="fa fa-search"></span>
-                    </a>&nbsp;                     -->
+                <td class="text-right" *ngIf="!iptu.IsPago">
+                    <!-- <a class="btn btn-info" [routerLink]="['/cidadao/iptu/iptu-detalhe',iptu.Id]"> -->
+                    <a class="btn btn-info" [routerLink]="['/cidadao/iptu']">
+                        <span class="fa fa-print"></span>
+                    </a>&nbsp;                    
                 </td>
             </tr>
         </tbody>

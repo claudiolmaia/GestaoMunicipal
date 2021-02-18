@@ -11,13 +11,14 @@ using System.Threading.Tasks;
 
 namespace PPGM.BFF.Integracao.Controllers
 {
-    
+
+    [Authorize]
     public class IptuController : MainController
     {
-        private readonly IDistributedCache _cache;
+        private readonly ICacheService _cache;
         private readonly ISturService _sturService;
         private readonly IUsuarioService _usuarioService;
-        public IptuController(IDistributedCache cache,
+        public IptuController(ICacheService cache,
             ISturService sturService,
             IUsuarioService usuarioService)
         {
@@ -29,8 +30,8 @@ namespace PPGM.BFF.Integracao.Controllers
         [HttpGet("integracao/iptu/{userId}")]        
         public async Task<IActionResult> ObterPorCpf(Guid userId)
         {
-            var cacheName = $"IptuUsuario{userId}";
-            string jsonCache = await _cache.GetStringAsync(cacheName);
+            var cacheName = $"iptu-{userId}";
+            string jsonCache = await _cache.GetCache(cacheName);
             if (string.IsNullOrEmpty(jsonCache))
             {
                 var cpf = await _usuarioService.ObterCpfUsuario(userId);
@@ -41,11 +42,9 @@ namespace PPGM.BFF.Integracao.Controllers
                     WriteIndented = true
                 };
                 jsonCache = JsonSerializer.Serialize(data, jsOption);
-                DistributedCacheEntryOptions opcoesCache = new DistributedCacheEntryOptions();
-                opcoesCache.SetAbsoluteExpiration(TimeSpan.FromMinutes(10));
-                _cache.SetString(cacheName, jsonCache, opcoesCache);
 
-                //return CustomResponse(await _sturService.ObterIptuPorCpf(cpf));
+                _cache.CreateCache(cacheName, jsonCache, 5);
+
             }
 
             return CustomResponse(jsonCache);

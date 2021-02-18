@@ -27,6 +27,13 @@ export abstract class BaseService {
         };
     }
 
+    protected ObterUserId() {
+        let user = this.LocalStorage.obterUsuario();
+        if (user) {
+            return user.claims.find(e=> e.type == 'sub')?.value;
+        }
+    }
+
     protected extractData(response: any) {
         return response || {};
     }

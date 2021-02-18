@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PPGM.WebAPI.Core.Identidade;
 
-namespace PPGM.SAEM.API.Configuration
+namespace PPGM.SASCI.API.Configuration
 {
     public static class ApiConfig
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -9,7 +10,7 @@ namespace PPGM.BFF.Integracao.Services
 {
     public interface ISasciService
     {
-        Task<ConsultaDTO> ObterConsultaPorCpf(string cpf);
+        Task<List<ConsultaDTO>> ObterConsultaPorCpf(string cpf);
     }
 
     public class SasciService: Service, ISasciService
@@ -21,13 +22,13 @@ namespace PPGM.BFF.Integracao.Services
             _httpClient.BaseAddress = new Uri(settings.Value.SasciUrl);
         }
 
-        public async Task<ConsultaDTO> ObterConsultaPorCpf(string cpf)
+        public async Task<List<ConsultaDTO>> ObterConsultaPorCpf(string cpf)
         {
             var response = await _httpClient.GetAsync($"/consulta/{cpf}");
 
             TratarErrosResponse(response);
 
-            return await DeserializarObjetoResponse<ConsultaDTO>(response);
+            return await DeserializarObjetoResponse<List<ConsultaDTO>>(response);
         }
     }
 }

@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PPGM.SAEM.API.Models;
+using PPGM.SASCI.API.Models;
 using PPGM.WebAPI.Core.Controllers;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace PPGM.SAEM.API.Controllers
+namespace PPGM.SASCI.API.Controllers
 {
     public class ConsultaController : MainController
     {
@@ -18,9 +15,8 @@ namespace PPGM.SAEM.API.Controllers
             _consultaRepository = consultaRepository;
         }
 
-        [HttpGet("consulta")]
-        public async Task<List<Consulta>> ObterPorCpf(string cpf
-            )
+        [HttpGet("consulta/{cpf}")]
+        public async Task<List<Consulta>> ObterPorCpf(string cpf)
         {
             return await _consultaRepository.ObterPorCpf(cpf);
         }

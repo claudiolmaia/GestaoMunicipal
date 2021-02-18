@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PPGM.SAEM.API
+namespace PPGM.SASCI.API
 {
     public class Program
     {

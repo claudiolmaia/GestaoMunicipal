@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PPGM.SAEM.API.Models;
+using PPGM.SASCI.API.Models;
 using PPGM.WebAPI.Core.Controllers;
 
-namespace PPGM.SAEM.API.Controllers
+namespace PPGM.SASCI.API.Controllers
 {
     public class AlunoController : MainController
     {

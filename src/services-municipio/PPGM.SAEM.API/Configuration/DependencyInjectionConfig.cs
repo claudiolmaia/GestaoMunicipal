@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PPGM.SAEM.API.Data;
-using PPGM.SAEM.API.Models;
+using PPGM.SASCI.API.Data;
+using PPGM.SASCI.API.Models;
 
-namespace PPGM.SAEM.API.Configuration
+namespace PPGM.SASCI.API.Configuration
 {
     public static class DependencyInjectionConfig
     {

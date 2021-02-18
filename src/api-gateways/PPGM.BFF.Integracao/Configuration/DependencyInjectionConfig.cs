@@ -15,6 +15,7 @@ namespace PPGM.BFF.Integracao.Configuration.Configuration
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IAspNetUser, AspNetUser>();
+            services.AddScoped<ICacheService, CacheService>();
 
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
@@ -52,6 +53,9 @@ namespace PPGM.BFF.Integracao.Configuration.Configuration
                 .AddPolicyHandler(PollyExtensions.EsperarTentar())
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+            
+            
+
         }
     }
 }

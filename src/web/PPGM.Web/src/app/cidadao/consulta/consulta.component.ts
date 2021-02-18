@@ -4,29 +4,24 @@ import { environment } from 'src/environments/environment';
 import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 
-import { Iptu } from '../models/iptu';
+import { Consulta } from '../models/consulta';
 
 @Component({
-  selector: 'app-iptu',
-  templateUrl: './iptu.component.html'
+  selector: 'app-consulta',
+  templateUrl: './consulta.component.html'
 })
-export class IptuComponent implements OnInit {
+export class ConsultaComponent implements OnInit {
 
-  imagens: string = environment.imagensUrl;
-
-  public iptus: Iptu[];
-  errorMessage: string;
+  public consultas: Consulta[];
 
   constructor(private cidadaoService: CidadaoService, 
     private router: Router,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    // let user = this.cidadaoService.LocalStorage.obterUsuario();
-    // let id = user.claims.find(e=> e.type == 'sub')?.value;
-    this.cidadaoService.obterIptuPorCidadao()
+    this.cidadaoService.obterConsultaPorCidadao()
       .subscribe(
-        iptus => this.iptus = iptus,
+        res => this.consultas = res,
         error => {this.processarFalha(error)});
   }
 

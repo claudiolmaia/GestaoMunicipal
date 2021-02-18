@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PPGM.SAEM.API.Models
+namespace PPGM.SASCI.API.Models
 {
     public interface IAlunoRepository
     {

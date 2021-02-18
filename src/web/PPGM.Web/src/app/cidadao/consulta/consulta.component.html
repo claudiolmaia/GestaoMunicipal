@@ -1,0 +1,34 @@
+<div class="container main-container">
+
+    <h1>Lista Consultas</h1>
+    <hr>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Local
+                </th>
+                <th>
+                    Médico
+                </th>
+                <th>
+                    Data
+                </th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let consulta of consultas">
+                <td>
+                    {{ consulta.Unidade + ' - ' + consulta.Consultorio }}
+                </td>
+                <td>
+                    {{ consulta.Medico }}
+                </td>
+                <td>
+                    {{ consulta.DataConsulta }}
+                </td>                
+            </tr>
+        </tbody>
+    </table>
+</div>

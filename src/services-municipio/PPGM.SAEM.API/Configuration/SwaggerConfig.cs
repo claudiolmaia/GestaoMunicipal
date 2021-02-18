@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace PPGM.SAEM.API.Configuration
+namespace PPGM.SASCI.API.Configuration
 {
     public static class SwaggerConfig
     {

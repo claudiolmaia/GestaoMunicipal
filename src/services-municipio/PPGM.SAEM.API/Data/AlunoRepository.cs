@@ -1,4 +1,4 @@
-﻿using PPGM.SAEM.API.Models;
+﻿using PPGM.SASCI.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace PPGM.SAEM.API.Data
+namespace PPGM.SASCI.API.Data
 {
     public class AlunoRepository : IAlunoRepository
     {

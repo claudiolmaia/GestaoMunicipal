@@ -14,13 +14,6 @@ namespace PPGM.STUR.API
     {
         public static void Main(string[] args)
         {
-            //Log.Logger = new LoggerConfiguration()
-            //    .ReadFrom()
-            //    .Enrich.WithProperty("ApplicationName", typeof(Program).Assembly.GetName().Name)
-            //    .Enrich.FromLogContext()
-            //    .WriteTo.MongoDB("mongodb://root:ppgm2021@127.0.0.1:27017/ppgm-db", "log")
-            //    .CreateLogger();
-
             try
             {
                 Log.Information("Iniciando a aplicação...");

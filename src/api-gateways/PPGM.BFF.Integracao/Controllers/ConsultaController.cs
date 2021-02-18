@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +19,39 @@ namespace PPGM.BFF.Integracao.Controllers
     public class ConsultaController : MainController
     {
         private readonly ISasciService _sasciService;
+        private readonly IUsuarioService _usuarioService;
+        private readonly ICacheService _cache;
 
-        public ConsultaController(ISasciService sasciService)
+        public ConsultaController(ISasciService sasciService,
+            IUsuarioService usuarioService,
+            ICacheService cache)
         {
             _sasciService = sasciService;
+            _usuarioService = usuarioService;
+            _cache = cache;
         }
 
-        [HttpGet("integracao/consulta/{cpf}")]
-        public async Task<IActionResult> ObterPorCpf(string cpf)
+        [HttpGet("integracao/consulta/{userId}")]
+        public async Task<IActionResult> ObterConsultaUsuario(Guid userId)
         {
-            return CustomResponse(await _sasciService.ObterConsultaPorCpf(cpf));
+            var cacheName = $"consulta-{userId}";
+            string jsonCache = await _cache.GetCache(cacheName);
+            if (string.IsNullOrEmpty(jsonCache))
+            {
+                var cpf = await _usuarioService.ObterCpfUsuario(userId);
+                var data = await _sasciService.ObterConsultaPorCpf(cpf);
+
+                var jsOption = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                    WriteIndented = true
+                };
+                jsonCache = JsonSerializer.Serialize(data, jsOption);
+
+                _cache.CreateCache(cacheName, jsonCache, 5);
+            }
+
+            return CustomResponse(jsonCache);
         }
 
     }
