@@ -10,19 +10,19 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   {
-    path: 'cidadao',
-    loadChildren: () => import('./cidadao/cidadao.module')
-      .then(m => m.CidadaoModule)
-  },
-  {
     path: 'conta',
     loadChildren: () => import('./conta/conta.module')
       .then(m => m.ContaModule)
   },
   {
-    path: 'fornecedores',
-    loadChildren: () => import('./fornecedor/fornecedor.module')
-      .then(m => m.FornecedorModule)
+    path: 'cidadao',
+    loadChildren: () => import('./cidadao/cidadao.module')
+      .then(m => m.CidadaoModule)
+  },
+  {
+    path: 'geo',
+    loadChildren: () => import('./geo/geo.module')
+      .then(m => m.GeoModule)
   },
   {
     path: 'produtos',

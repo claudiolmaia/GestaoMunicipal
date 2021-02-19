@@ -8,6 +8,8 @@ export abstract class BaseService {
     protected UrlServiceV1: string = environment.apiUrlv1;
     protected UrlAutenticacaoV1: string = environment.apiUrlAutenticacao;
     protected UrlIntegracaoV1: string = environment.apiUrlIntegracao;
+    protected UrlIbge: string = environment.apiUrlIbge;
+
     public LocalStorage = new LocalStorageUtils();
 
     protected ObterHeaderJson() {
