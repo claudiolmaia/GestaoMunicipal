@@ -22,5 +22,24 @@ namespace PPGM.STUR.API.Data.Repository
             var result = await _context.iptu.Where(x => x.CPF == cpf).ToListAsync();
             return result;
         }
+
+        public async Task<List<Iptu>> ObterTodosAbertos()
+        {
+            var result = await _context.iptu.Where(x => !x.IsPago).ToListAsync();
+            return result;
+        }
+
+        public async Task<bool> BaixarIptu(int id)
+        {
+            var iptu = await _context.iptu.FindAsync(id);
+            if(iptu != null)
+            {
+                iptu.IsPago = true;
+                _context.iptu.Update(iptu);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
     }    
 }

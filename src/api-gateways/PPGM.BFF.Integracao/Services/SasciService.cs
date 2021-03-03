@@ -11,6 +11,9 @@ namespace PPGM.BFF.Integracao.Services
     public interface ISasciService
     {
         Task<List<ConsultaDTO>> ObterConsultaPorCpf(string cpf);
+        Task<List<ConsultaDTO>> ObterConsultas();
+        Task<ConsultaDTO> AdicionarConsulta(ConsultaDTO consulta);
+        Task<bool> RemoverConsulta(int id);
     }
 
     public class SasciService: Service, ISasciService
@@ -30,5 +33,34 @@ namespace PPGM.BFF.Integracao.Services
 
             return await DeserializarObjetoResponse<List<ConsultaDTO>>(response);
         }
+
+        public async Task<List<ConsultaDTO>> ObterConsultas()
+        {
+            var response = await _httpClient.GetAsync($"/consulta");
+
+            TratarErrosResponse(response);
+
+            return await DeserializarObjetoResponse<List<ConsultaDTO>>(response);
+        }
+
+        public async Task<ConsultaDTO> AdicionarConsulta(ConsultaDTO consulta)
+        {
+            var content = ObterConteudo(consulta);
+            var response = await _httpClient.PostAsync($"/consulta", content);
+
+            TratarErrosResponse(response);
+
+            return await DeserializarObjetoResponse<ConsultaDTO>(response);
+        }
+
+        public async Task<bool> RemoverConsulta(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"/consulta/{id}");
+
+            TratarErrosResponse(response);
+
+            return await DeserializarObjetoResponse<bool>(response);
+        }
+
     }
 }

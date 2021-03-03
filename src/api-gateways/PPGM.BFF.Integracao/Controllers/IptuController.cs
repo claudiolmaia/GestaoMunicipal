@@ -50,5 +50,37 @@ namespace PPGM.BFF.Integracao.Controllers
             return CustomResponse(jsonCache);
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet("integracao/iptu")]
+        public async Task<IActionResult> ObterTodos()
+        {
+            var cacheName = $"iptu-todos";
+            string jsonCache = await _cache.GetCache(cacheName);
+            if (string.IsNullOrEmpty(jsonCache))
+            {
+                var data = await _sturService.ObterTodos();
+                var jsOption = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                    WriteIndented = true
+                };
+                jsonCache = JsonSerializer.Serialize(data, jsOption);
+
+                _cache.CreateCache(cacheName, jsonCache, 5);
+            }
+
+            return CustomResponse(jsonCache);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("integracao/iptu/{id}")]
+        public async Task<IActionResult> Baixar(int id)
+        {
+            var result = await _sturService.Baixar(id);
+            return CustomResponse(result);
+        }
+
+
+
     }
 }

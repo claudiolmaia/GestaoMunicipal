@@ -6,46 +6,83 @@
         <h4>Crie sua conta</h4>
         <hr>
 
-        <div class="alert alert-danger" *ngIf="errors.length > 0">
+        <!-- <div class="alert alert-danger" *ngIf="errors.length > 0">
             <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
             <ul>
-                <li *ngFor="let error of errors">{{ error }}</li>
+                <li *ngFor="let error of errors">{{ error.senha }}</li>
             </ul>
+        </div>
+         -->
+         <div class="alert alert-danger">
+            <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+            <ul>
+                <li *ngFor="let field of errors | keyvalue">{{ field.key }}
+                    <ol *ngFor="let error of field.value">{{ error }}</ol>
+                </li>
+            </ul>
+        </div>
+        
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Nome</label>
+            <div class="col-md-10">
+                <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome"
+                    [ngClass]="{'is-invalid': displayMessage.nome }" />
+                <span class="text-danger" *ngIf="displayMessage.nome">
+                    <p [innerHTML]="displayMessage.nome"></p>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">CPF</label>
+            <div class="col-md-10">
+                <input class="form-control" id="cpf" type="text" placeholder="CPF (requerido)" formControlName="cpf"
+                    [ngClass]="{'is-invalid': displayMessage.cpf }" />
+                <span class="text-danger" *ngIf="displayMessage.cpf">
+                    <p [innerHTML]="displayMessage.cpf"></p>
+                </span>
+            </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2 control-label">E-mail</label>
             <div class="col-md-10">
-                <input class="form-control" id="email" type="text" placeholder="E-mail (requerido)" formControlName="email" [ngClass]="{'is-invalid': displayMessage.email }" />
+                <input class="form-control" id="email" type="text" placeholder="E-mail (requerido)"
+                    formControlName="email" [ngClass]="{'is-invalid': displayMessage.email }" />
                 <span class="text-danger" *ngIf="displayMessage.email">
-                                <p [innerHTML]="displayMessage.email"></p>
-                            </span>
+                    <p [innerHTML]="displayMessage.email"></p>
+                </span>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2 control-label">Senha</label>
             <div class="col-md-10">
-                <input class="form-control" id="password" type="password" placeholder="Senha (requerido)" formControlName="password" [ngClass]="{'is-invalid': displayMessage.password }" />
-                <span class="text-danger" *ngIf="displayMessage.password">
-                                <p [innerHTML]="displayMessage.password"></p>
-                            </span>
+                <input class="form-control" id="senha" type="password" placeholder="Senha (requerido)"
+                    formControlName="senha" [ngClass]="{'is-invalid': displayMessage.senha }" />
+                <span class="text-danger" *ngIf="displayMessage.senha">
+                    <p [innerHTML]="displayMessage.senha"></p>
+                </span>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2 control-label">Confirme a Senha</label>
             <div class="col-md-10">
-                <input class="form-control" id="confirmPassword" type="password" placeholder="Confirme a Senha (requerido)" formControlName="confirmPassword" [ngClass]="{'is-invalid': displayMessage.confirmPassword }" />
-                <span class="text-danger" *ngIf="displayMessage.confirmPassword">
-                                <p [innerHTML]="displayMessage.confirmPassword"></p>
-                            </span>
+                <input class="form-control" id="senhaConfirmacao" type="password"
+                    placeholder="Confirme a Senha (requerido)" formControlName="senhaConfirmacao"
+                    [ngClass]="{'is-invalid': displayMessage.senhaConfirmacao }" />
+                <span class="text-danger" *ngIf="displayMessage.senhaConfirmacao">
+                    <p [innerHTML]="displayMessage.senhaConfirmacao"></p>
+                </span>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-4 col-md-offset-2">
-                <span><button class="btn btn-success" id="Registrar" [disabled]="!cadastroForm.valid" type="submit">Registrar</button></span>
+                <span><button class="btn btn-success" id="Registrar" [disabled]="!cadastroForm.valid"
+                        type="submit">Registrar</button></span>
             </div>
         </div>
     </form>

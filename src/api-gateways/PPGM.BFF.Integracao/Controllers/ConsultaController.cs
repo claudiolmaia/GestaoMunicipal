@@ -30,7 +30,7 @@ namespace PPGM.BFF.Integracao.Controllers
             _usuarioService = usuarioService;
             _cache = cache;
         }
-
+        
         [HttpGet("integracao/consulta/{userId}")]
         public async Task<IActionResult> ObterConsultaUsuario(Guid userId)
         {
@@ -52,6 +52,45 @@ namespace PPGM.BFF.Integracao.Controllers
             }
 
             return CustomResponse(jsonCache);
+        }
+
+        [Authorize(Roles ="Admin")]
+        [HttpGet("integracao/consulta")]
+        public async Task<IActionResult> ObterConsulta()
+        {
+            var cacheName = $"consulta";
+            string jsonCache = await _cache.GetCache(cacheName);
+            if (string.IsNullOrEmpty(jsonCache))
+            {
+                var data = await _sasciService.ObterConsultas();
+
+                var jsOption = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                    WriteIndented = true
+                };
+                jsonCache = JsonSerializer.Serialize(data, jsOption);
+
+                _cache.CreateCache(cacheName, jsonCache, 5);
+            }
+
+            return CustomResponse(jsonCache);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("integracao/consulta")]
+        public async Task<IActionResult> Adicionar(ConsultaDTO consulta)
+        {
+             var result = await _sasciService.AdicionarConsulta(consulta);
+            return CustomResponse(result);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("integracao/consulta/{id}")]
+        public async Task<IActionResult> Remover(int id)
+        {
+            var result = await _sasciService.RemoverConsulta(id);
+            return CustomResponse(result);
         }
 
     }

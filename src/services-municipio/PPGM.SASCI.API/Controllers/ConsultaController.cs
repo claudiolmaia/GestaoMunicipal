@@ -15,10 +15,28 @@ namespace PPGM.SASCI.API.Controllers
             _consultaRepository = consultaRepository;
         }
 
+        [HttpGet("consulta")]
+        public async Task<List<Consulta>> ObterTodas()
+        {
+            return await _consultaRepository.ObterTodas();
+        }
+
         [HttpGet("consulta/{cpf}")]
         public async Task<List<Consulta>> ObterPorCpf(string cpf)
         {
             return await _consultaRepository.ObterPorCpf(cpf);
+        }
+
+        [HttpPost("consulta")]
+        public async Task<Consulta> Adicionar(Consulta consulta)
+        {
+            return await _consultaRepository.AdicionarConsulta(consulta);
+        }
+
+        [HttpDelete("consulta/{id}")]
+        public async Task<bool> Remover(int id)
+        {
+            return await _consultaRepository.RemoverConsulta(id);
         }
     }
 }

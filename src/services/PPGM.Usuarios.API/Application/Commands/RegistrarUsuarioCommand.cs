@@ -56,6 +56,7 @@ namespace PPGM.Usuarios.API.Application.Commands
             {
                 return Core.DomainObjects.Email.Validar(email);
             }
+
         }
     }
 }

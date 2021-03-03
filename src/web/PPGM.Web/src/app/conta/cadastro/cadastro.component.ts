@@ -9,6 +9,8 @@ import { Usuario } from '../models/usuario';
 import { ContaService } from '../services/conta.service';
 
 import { FormBaseComponent } from 'src/app/base-components/form-base.component';
+import { importExpr } from '@angular/compiler/src/output/output_ast';
+import { CustomValidator } from "src/app/validators/custom.validator";
 
 @Component({
   selector: 'app-cadastro',
@@ -30,15 +32,26 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
     super();
 
     this.validationMessages = {
+      nome: {
+        required: 'Informe o nome do usuário',
+      },
+      cpf: {
+        required: 'Informe o cpf do usuário',
+        onlyNumber: 'Digitar apenas números',
+        equalDigits: 'CPF deve ser valido',
+        length: 'CPF deve conter 11 digitos',
+        digit: 'CPF deve ser valido'
+      },
       email: {
         required: 'Informe o e-mail',
-        email: 'Email inválido'
+        email: 'Email inválido',
+
       },
-      password: {
+      senha: {
         required: 'Informe a senha',
         rangeLength: 'A senha deve possuir entre 6 e 15 caracteres'
       },
-      confirmPassword: {
+      senhaConfirmacao: {
         required: 'Informe a senha novamente',
         rangeLength: 'A senha deve possuir entre 6 e 15 caracteres',
         equalTo: 'As senhas não conferem'
@@ -50,13 +63,17 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
 
   ngOnInit(): void {
 
+    let nome = new FormControl('', [Validators.required])
+    let cpf = new FormControl('', [Validators.required, CustomValidator.cfpValidator, CustomValidators.number])
     let senha = new FormControl('', [Validators.required, CustomValidators.rangeLength([6, 15])]);
     let senhaConfirm = new FormControl('', [Validators.required, CustomValidators.rangeLength([6, 15]), CustomValidators.equalTo(senha)]);
 
     this.cadastroForm = this.fb.group({
+      nome: nome,
+      cpf: cpf,
       email: ['', [Validators.required, Validators.email]],
-      password: senha,
-      confirmPassword: senhaConfirm
+      senha: senha,
+      senhaConfirmacao: senhaConfirm
     });
   }
 

@@ -40,7 +40,7 @@ namespace NSE.Identidade.API.Controllers
 
             if (result.Succeeded)
             {
-                var clienteResult = await RegistrarCliente(usuarioRegistro);
+                var clienteResult = await RegistrarUsuario(usuarioRegistro);
 
                 if (!clienteResult.ValidationResult.IsValid)
                 {
@@ -83,7 +83,7 @@ namespace NSE.Identidade.API.Controllers
             return CustomResponse();
         }
 
-        private async Task<ResponseMessage> RegistrarCliente(UsuarioRegistro usuarioRegistro)
+        private async Task<ResponseMessage> RegistrarUsuario(UsuarioRegistro usuarioRegistro)
         {
             var usuario = await _authenticationService.UserManager.FindByEmailAsync(usuarioRegistro.Email);
 
