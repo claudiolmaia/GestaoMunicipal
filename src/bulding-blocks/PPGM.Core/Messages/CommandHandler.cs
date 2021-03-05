@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using PPGM.Core.Data;
+using System.Threading.Tasks;
 
 namespace PPGM.Core.Messages
 {

@@ -7,6 +7,9 @@
         <thead class="thead-dark">
             <tr>
                 <th>
+                    Paciente
+                </th>
+                <th>
                     Local
                 </th>
                 <th>
@@ -14,11 +17,17 @@
                 </th>
                 <th>
                     Data
-                </th>                
+                </th>
+                <th>
+                    Ações
+                </th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let consulta of consultas">
+                <td>
+                    {{ consulta.CPF }}
+                </td>
                 <td>
                     {{ consulta.Unidade + ' - ' + consulta.Consultorio }}
                 </td>
@@ -27,10 +36,109 @@
                 </td>
                 <td>
                     {{ consulta.DataConsulta }}
-                </td>                
+                </td>
+                <td>
+                    <button class="btn btn-info" (click)="OpenModalRemover(modalConfirmacao)">
+                        <span class="fa fa-trash-alt"></span>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
 
+    <button  class="btn btn-success btn-block" (click)="OpenModalAdicionar(modalAdicionar)">Adicionar</button>
     <a href="/admin/principal" class="btn btn-info btn-block">Voltar</a>
 </div>
+
+<ng-template #modalConfirmacao let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Baixar o Item Selecionado</h5>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Deseja realmente realizar a baixa do titulo selecionado.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Confirmar</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close')">Cancelar</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #modalAdicionar let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Adicionar nova consulta</h5>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form novalidate (ngSubmit)="adicionarConsulta()" [formGroup]="cadastroForm">        
+                <div class="form-group">
+                    <label class="col-md-2 control-label">CPF Paciente</label>
+                    <div class="col-md-10">
+                        <input class="form-control" id="cpf" type="text" placeholder="CPF (requerido)" formControlName="CPF"
+                            [ngClass]="{'is-invalid': displayMessage.CPF }" />
+                        <span class="text-danger" *ngIf="displayMessage.CPF">
+                            <p [innerHTML]="displayMessage.CPF"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Médico</label>
+                    <div class="col-md-10">
+                        <input class="form-control" id="nome" type="text" placeholder="Médico (requerido)" formControlName="Medico"
+                            [ngClass]="{'is-invalid': displayMessage.Medico }" />
+                        <span class="text-danger" *ngIf="displayMessage.Medico">
+                            <p [innerHTML]="displayMessage.Medico"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Unidade</label>
+                    <div class="col-md-10">
+                        <input class="form-control" id="nome" type="text" placeholder="Unidade (requerido)" formControlName="Unidade"
+                            [ngClass]="{'is-invalid': displayMessage.Unidade }" />
+                        <span class="text-danger" *ngIf="displayMessage.Unidade">
+                            <p [innerHTML]="displayMessage.Unidade"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Consultório</label>
+                    <div class="col-md-10">
+                        <input class="form-control" id="nome" type="number" formControlName="Consultorio"
+                            [ngClass]="{'is-invalid': displayMessage.consultorio }" />
+                        <span class="text-danger" *ngIf="displayMessage.consultorio">
+                            <p [innerHTML]="displayMessage.consultorio"></p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Data Consulta</label>
+                    <div class="col-md-10">
+                        <input class="form-control" id="nome" type="datetime" formControlName="DataConsulta"
+                            [ngClass]="{'is-invalid': displayMessage.DataConsulta }" />
+                        <span class="text-danger" *ngIf="displayMessage.DataConsulta">
+                            <p [innerHTML]="displayMessage.DataConsulta"></p>
+                        </span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-block">Salvar</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Confirmar</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close')">Cancelar</button>
+        </div>
+    </div>
+</ng-template>

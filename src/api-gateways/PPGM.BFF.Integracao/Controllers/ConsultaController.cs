@@ -21,6 +21,7 @@ namespace PPGM.BFF.Integracao.Controllers
         private readonly ISasciService _sasciService;
         private readonly IUsuarioService _usuarioService;
         private readonly ICacheService _cache;
+        private readonly string _cacheName = "consulta";
 
         public ConsultaController(ISasciService sasciService,
             IUsuarioService usuarioService,
@@ -34,7 +35,7 @@ namespace PPGM.BFF.Integracao.Controllers
         [HttpGet("integracao/consulta/{userId}")]
         public async Task<IActionResult> ObterConsultaUsuario(Guid userId)
         {
-            var cacheName = $"consulta-{userId}";
+            var cacheName = $"{_cacheName}-{userId}";
             string jsonCache = await _cache.GetCache(cacheName);
             if (string.IsNullOrEmpty(jsonCache))
             {
@@ -58,8 +59,7 @@ namespace PPGM.BFF.Integracao.Controllers
         [HttpGet("integracao/consulta")]
         public async Task<IActionResult> ObterConsulta()
         {
-            var cacheName = $"consulta";
-            string jsonCache = await _cache.GetCache(cacheName);
+            string jsonCache = await _cache.GetCache(_cacheName);
             if (string.IsNullOrEmpty(jsonCache))
             {
                 var data = await _sasciService.ObterConsultas();
@@ -71,7 +71,7 @@ namespace PPGM.BFF.Integracao.Controllers
                 };
                 jsonCache = JsonSerializer.Serialize(data, jsOption);
 
-                _cache.CreateCache(cacheName, jsonCache, 5);
+                _cache.CreateCache(_cacheName, jsonCache, 5);
             }
 
             return CustomResponse(jsonCache);
@@ -82,6 +82,7 @@ namespace PPGM.BFF.Integracao.Controllers
         public async Task<IActionResult> Adicionar(ConsultaDTO consulta)
         {
              var result = await _sasciService.AdicionarConsulta(consulta);
+            _cache.RemoveCache(_cacheName);
             return CustomResponse(result);
         }
 
@@ -90,6 +91,7 @@ namespace PPGM.BFF.Integracao.Controllers
         public async Task<IActionResult> Remover(int id)
         {
             var result = await _sasciService.RemoverConsulta(id);
+            _cache.RemoveCache(_cacheName);
             return CustomResponse(result);
         }
 

@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Results;
+using MediatR;
 using PPGM.Core.Messages;
 using System.Threading.Tasks;
-using MediatR;
 
 namespace PPGM.Core.Mediator
 {

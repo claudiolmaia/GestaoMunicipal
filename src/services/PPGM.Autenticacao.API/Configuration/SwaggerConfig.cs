@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace PPGM.Autenticacao.API.Configuration
 {
@@ -18,7 +18,6 @@ namespace PPGM.Autenticacao.API.Configuration
                     Contact = new OpenApiContact() { Name = "Cláudio Lúcio Maia", Email = "claudioluciomaia@gmai.com" },
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                 });
-
             });
 
             return services;

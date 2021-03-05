@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PPGM.Core.Messages.Integration;
 using PPGM.Autenticacao.API.Models;
 using PPGM.Autenticacao.API.Services;
+using PPGM.Core.Messages.Integration;
 using PPGM.MessageBus;
 using PPGM.WebAPI.Core.Controllers;
+using System;
+using System.Threading.Tasks;
 
 namespace NSE.Identidade.API.Controllers
 {
@@ -69,7 +69,6 @@ namespace NSE.Identidade.API.Controllers
 
             if (result.Succeeded)
             {
-                
                 return CustomResponse(await _authenticationService.GerarJwt(usuarioLogin.Email));
             }
 

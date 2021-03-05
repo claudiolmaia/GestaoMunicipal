@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using PPGM.BFF.Integracao.Services;
 using PPGM.WebAPI.Core.Controllers;
 using System;
@@ -11,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace PPGM.BFF.Integracao.Controllers
 {
-
     [Authorize]
     public class IptuController : MainController
     {
         private readonly ICacheService _cache;
         private readonly ISturService _sturService;
         private readonly IUsuarioService _usuarioService;
+        private readonly string _cacheName = "iptu";
+
         public IptuController(ICacheService cache,
             ISturService sturService,
             IUsuarioService usuarioService)
@@ -27,10 +27,10 @@ namespace PPGM.BFF.Integracao.Controllers
             _usuarioService = usuarioService;
         }
 
-        [HttpGet("integracao/iptu/{userId}")]        
+        [HttpGet("integracao/iptu/{userId}")]
         public async Task<IActionResult> ObterPorCpf(Guid userId)
         {
-            var cacheName = $"iptu-{userId}";
+            var cacheName = $"{_cache}-{userId}";
             string jsonCache = await _cache.GetCache(cacheName);
             if (string.IsNullOrEmpty(jsonCache))
             {
@@ -44,7 +44,6 @@ namespace PPGM.BFF.Integracao.Controllers
                 jsonCache = JsonSerializer.Serialize(data, jsOption);
 
                 _cache.CreateCache(cacheName, jsonCache, 5);
-
             }
 
             return CustomResponse(jsonCache);
@@ -54,8 +53,7 @@ namespace PPGM.BFF.Integracao.Controllers
         [HttpGet("integracao/iptu")]
         public async Task<IActionResult> ObterTodos()
         {
-            var cacheName = $"iptu-todos";
-            string jsonCache = await _cache.GetCache(cacheName);
+            string jsonCache = await _cache.GetCache(_cacheName);
             if (string.IsNullOrEmpty(jsonCache))
             {
                 var data = await _sturService.ObterTodos();
@@ -66,7 +64,7 @@ namespace PPGM.BFF.Integracao.Controllers
                 };
                 jsonCache = JsonSerializer.Serialize(data, jsOption);
 
-                _cache.CreateCache(cacheName, jsonCache, 5);
+                _cache.CreateCache(_cacheName, jsonCache, 5);
             }
 
             return CustomResponse(jsonCache);
@@ -77,10 +75,9 @@ namespace PPGM.BFF.Integracao.Controllers
         public async Task<IActionResult> Baixar(int id)
         {
             var result = await _sturService.Baixar(id);
+            _cache.RemoveCache(_cacheName);
+
             return CustomResponse(result);
         }
-
-
-
     }
 }

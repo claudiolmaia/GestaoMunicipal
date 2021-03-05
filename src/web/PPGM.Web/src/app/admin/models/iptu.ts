@@ -8,5 +8,6 @@ export interface Iptu {
     UF: string,
     Valor: number,
     DataVencimento: string,
+    CPF: string,
     IsPago: boolean    
   }

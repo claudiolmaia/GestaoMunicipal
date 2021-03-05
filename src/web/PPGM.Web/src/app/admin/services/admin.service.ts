@@ -12,16 +12,21 @@ export class AdminService extends BaseService {
 
     constructor(private http: HttpClient) { super(); }
 
-    obterIptuPorCidadao(): Observable<Iptu[]> {
+    obterIptu(): Observable<Iptu[]> {
         return this.http
-            .get<Iptu[]>(`${this.UrlIntegracaoV1}integracao/iptu/${super.ObterUserId()}`, super.ObterAuthHeaderJson())
+            .get<Iptu[]>(`${this.UrlIntegracaoV1}integracao/iptu`, super.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 
-    obterConsultaPorCidadao(): Observable<Consulta[]> {
-        
+    baixarIptu(Id: number): Observable<boolean> {
         return this.http
-            .get<Iptu[]>(`${this.UrlIntegracaoV1}integracao/consulta/${super.ObterUserId()}`, super.ObterAuthHeaderJson())
+            .put<boolean>(`${this.UrlIntegracaoV1}integracao/iptu/${Id}`, [], super.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    obterConsulta(): Observable<Consulta[]> {
+        return this.http
+            .get<Iptu[]>(`${this.UrlIntegracaoV1}integracao/consulta`, super.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 }

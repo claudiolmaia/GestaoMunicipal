@@ -50,7 +50,7 @@ namespace PPGM.Autenticacao.API.Configuration
             {
                 endpoints.MapControllers();
             });
-            
+
             app.UseJwksDiscovery();
 
             return app;

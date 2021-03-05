@@ -14,6 +14,8 @@ namespace PPGM.BFF.Integracao.Services
     {
         Task<string> GetCache(string cacheName);
         void CreateCache(string cacheName, string data, int minutos);
+
+        void RemoveCache(string cacheName);
     }
     
     
@@ -36,6 +38,11 @@ namespace PPGM.BFF.Integracao.Services
             DistributedCacheEntryOptions opcoesCache = new DistributedCacheEntryOptions();
             opcoesCache.SetAbsoluteExpiration(TimeSpan.FromMinutes(minutos));
             await _cache.SetStringAsync(cacheName, data, opcoesCache);
+        }
+
+        public async void RemoveCache(string cacheName)
+        {
+            await _cache.RemoveAsync(cacheName);
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using PPGM.Core.Messages;
+using System;
 using System.Collections.Generic;
-using PPGM.Core.Messages;
 
 namespace PPGM.Core.DomainObjects
 {
@@ -70,6 +70,6 @@ namespace PPGM.Core.DomainObjects
             return $"{GetType().Name} [Id={Id}]";
         }
 
-        #endregion
+        #endregion Comparações
     }
 }

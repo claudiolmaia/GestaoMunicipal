@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PPGM.Core.Communication;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PPGM.WebAPI.Core.Controllers
 {

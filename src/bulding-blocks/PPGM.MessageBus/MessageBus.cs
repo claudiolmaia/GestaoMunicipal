@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using EasyNetQ;
-using PPGM.Core.Messages.Integration;
+﻿using EasyNetQ;
 using Polly;
+using PPGM.Core.Messages.Integration;
 using RabbitMQ.Client.Exceptions;
+using System;
+using System.Threading.Tasks;
 
 namespace PPGM.MessageBus
 {
@@ -77,7 +77,7 @@ namespace PPGM.MessageBus
 
         private void TryConnect()
         {
-            if(IsConnected) return;
+            if (IsConnected) return;
 
             var policy = Policy.Handle<EasyNetQException>()
                 .Or<BrokerUnreachableException>()

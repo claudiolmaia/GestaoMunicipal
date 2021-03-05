@@ -1,5 +1,5 @@
-﻿using System;
-using PPGM.Core.DomainObjects;
+﻿using PPGM.Core.DomainObjects;
+using System;
 
 namespace PPGM.Core.Data
 {
