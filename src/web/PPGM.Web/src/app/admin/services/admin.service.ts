@@ -6,6 +6,7 @@ import { catchError, map } from "rxjs/operators";
 import { BaseService } from 'src/app/services/base.service';
 import { Iptu } from '../models/iptu';
 import { Consulta } from '../models/consulta';
+import { ConsultaComponent } from '../consulta/consulta.component';
 
 @Injectable()
 export class AdminService extends BaseService {
@@ -26,7 +27,19 @@ export class AdminService extends BaseService {
 
     obterConsulta(): Observable<Consulta[]> {
         return this.http
-            .get<Iptu[]>(`${this.UrlIntegracaoV1}integracao/consulta`, super.ObterAuthHeaderJson())
+            .get<Consulta[]>(`${this.UrlIntegracaoV1}integracao/consulta`, super.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    adicionarConsulta(consulta: Consulta): Observable<Consulta> {
+        return this.http
+            .post<Consulta>(`${this.UrlIntegracaoV1}integracao/consulta`,consulta, super.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    removerConsulta(id: number): Observable<Consulta> {
+        return this.http
+            .delete<Consulta>(`${this.UrlIntegracaoV1}integracao/consulta/${id}`, super.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 }

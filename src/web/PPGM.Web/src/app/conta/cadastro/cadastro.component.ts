@@ -81,6 +81,8 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
     super.configurarValidacaoFormularioBase(this.formInputElements, this.cadastroForm);
   }
 
+  
+
   adicionarConta() {
     if (this.cadastroForm.dirty && this.cadastroForm.valid) {
       this.usuario = Object.assign({}, this.usuario, this.cadastroForm.value);

@@ -10,5 +10,6 @@ namespace PPGM.SASCI.API.Models
         Task<bool> RemoverConsulta(int id);
         Task<Consulta> AdicionarConsulta(Consulta data);
 
+        Task<bool> ValidaExisteConsulta(Consulta data);
     }
 }

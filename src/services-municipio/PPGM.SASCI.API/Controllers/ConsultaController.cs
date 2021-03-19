@@ -38,5 +38,11 @@ namespace PPGM.SASCI.API.Controllers
         {
             return await _consultaRepository.RemoverConsulta(id);
         }
+
+        [HttpGet("consulta/valida")]
+        public async Task<bool> ExisteConsulta([FromQuery]Consulta consulta)
+        {
+            return await _consultaRepository.ValidaExisteConsulta(consulta);
+        }
     }
 }

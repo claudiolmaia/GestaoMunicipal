@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using PPGM.BFF.Integracao.Extensions;
 using PPGM.BFF.Integracao.Models;
+using PPGM.Core.Utils;
 
 namespace PPGM.BFF.Integracao.Services
 {
@@ -14,6 +15,7 @@ namespace PPGM.BFF.Integracao.Services
         Task<List<ConsultaDTO>> ObterConsultas();
         Task<ConsultaDTO> AdicionarConsulta(ConsultaDTO consulta);
         Task<bool> RemoverConsulta(int id);
+        Task<bool> ExisteConsulta(ConsultaDTO consulta);
     }
 
     public class SasciService: Service, ISasciService
@@ -57,6 +59,17 @@ namespace PPGM.BFF.Integracao.Services
         {
             var response = await _httpClient.DeleteAsync($"/consulta/{id}");
 
+            TratarErrosResponse(response);
+
+            return await DeserializarObjetoResponse<bool>(response);
+        }
+
+        public async Task<bool> ExisteConsulta(ConsultaDTO consulta)
+        {
+            //var content = ObterConteudo(consulta);
+            var queryString = StringUtils.ToQueryString(consulta);
+            var response = await _httpClient.GetAsync($"/consulta/valida/?{queryString}");
+            
             TratarErrosResponse(response);
 
             return await DeserializarObjetoResponse<bool>(response);

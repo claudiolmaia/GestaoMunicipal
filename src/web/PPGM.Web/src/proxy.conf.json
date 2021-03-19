@@ -1,8 +1,9 @@
 {
   "/api/*": {
-    "target": "https://ppgm-api-autenticacao:5101",
+    "target": "https://ppgm-api-autenticacao:5101/api",
     "secure": false,
     "logLevel": "debug",
-    "changeOrigin": true
+    "changeOrigin": true,
+    "pathRewrite": {"^/api" : ""}
   }
 }

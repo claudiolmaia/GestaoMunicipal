@@ -33,4 +33,8 @@ export abstract class FormBaseComponent {
         this.displayMessage = this.genericValidator.processarMensagens(formGroup);
         this.mudancasNaoSalvas = true;
     }
+
+    public isEmpty(obj) {
+        return (obj && Object.keys(obj).length === 0);
+    }
 }

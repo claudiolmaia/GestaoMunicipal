@@ -13,7 +13,7 @@
             </ul>
         </div>
          -->
-         <div class="alert alert-danger">
+        <div class="alert alert-danger" *ngIf="!isEmpty(errors)">
             <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
             <ul>
                 <li *ngFor="let field of errors | keyvalue">{{ field.key }}
@@ -21,7 +21,7 @@
                 </li>
             </ul>
         </div>
-        
+
 
         <div class="form-group">
             <label class="col-md-2 control-label">Nome</label>

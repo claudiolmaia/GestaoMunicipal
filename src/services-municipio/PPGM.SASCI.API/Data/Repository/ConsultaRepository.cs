@@ -34,9 +34,20 @@ namespace PPGM.SASCI.API.Data.Repository
             if (consulta != null)
             {
                 var result = _context.consulta.Remove(consulta);
+                await _context.SaveChangesAsync();
                 return true;
             }
 
+            return false;
+        }
+
+        public async Task<bool> ValidaExisteConsulta(Consulta data)
+        {
+            var dt_tempoConsulta = data.DataConsulta.AddMinutes(30);
+            var verifica = await _context.consulta.AnyAsync(x => x.Unidade == data.Unidade && x.Consultorio == data.Consultorio && x.DataConsulta >= data.DataConsulta && data.DataConsulta <= dt_tempoConsulta);
+            if (verifica)
+                return true;
+            
             return false;
         }
 

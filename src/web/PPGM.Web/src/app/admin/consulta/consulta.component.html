@@ -1,3 +1,4 @@
+
 <div class="container main-container">
 
     <h1>Lista Consultas</h1>
@@ -35,10 +36,10 @@
                     {{ consulta.Medico }}
                 </td>
                 <td>
-                    {{ consulta.DataConsulta }}
+                    {{ consulta.DataConsulta | date: 'dd/MM/yyyy HH:mm' }}
                 </td>
                 <td>
-                    <button class="btn btn-info" (click)="OpenModalRemover(modalConfirmacao)">
+                    <button class="btn btn-info" (click)="openModalRemover(modalRemover, consulta.Id)">
                         <span class="fa fa-trash-alt"></span>
                     </button>
                 </td>
@@ -46,20 +47,20 @@
         </tbody>
     </table>
 
-    <button  class="btn btn-success btn-block" (click)="OpenModalAdicionar(modalAdicionar)">Adicionar</button>
+    <button class="btn btn-success btn-block" (click)="openModalAdicionar(modalAdicionar)">Adicionar</button>
     <a href="/admin/principal" class="btn btn-info btn-block">Voltar</a>
 </div>
 
-<ng-template #modalConfirmacao let-modal>
+<ng-template #modalRemover let-modal>
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Baixar o Item Selecionado</h5>
+        <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">Remover o Item Selecionado</h5>
             <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <p>Deseja realmente realizar a baixa do titulo selecionado.</p>
+            <p>Deseja realmente remover a consulta selecionada.</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Confirmar</button>
@@ -77,44 +78,53 @@
             </button>
         </div>
         <div class="modal-body">
-            <form novalidate (ngSubmit)="adicionarConsulta()" [formGroup]="cadastroForm">        
+            <div class="alert alert-danger" *ngIf="!isEmpty(errors)">
+                <ul>
+                    <li class="text-uppercase" *ngFor="let field of errors">{{ field.name }}
+                        <ol *ngFor="let error of field.value">{{ error }}</ol>
+                    </li>
+                </ul>
+            </div>
+            <form novalidate (ngSubmit)="adicionarConsulta()" [formGroup]="cadastroForm">
                 <div class="form-group">
-                    <label class="col-md-2 control-label">CPF Paciente</label>
-                    <div class="col-md-10">
-                        <input class="form-control" id="cpf" type="text" placeholder="CPF (requerido)" formControlName="CPF"
-                            [ngClass]="{'is-invalid': displayMessage.CPF }" />
-                        <span class="text-danger" *ngIf="displayMessage.CPF">
-                            <p [innerHTML]="displayMessage.CPF"></p>
+                    <label class="col-md-12 control-label">CPF Paciente</label>
+                    <div class="col-md-12">
+                        <input class="form-control" id="cpf" type="text" placeholder="CPF (requerido)"
+                            formControlName="cpf" [ngClass]="{'is-invalid': displayMessage.cpf }" mdbInput
+                            mdbValidate />
+                        <span class="text-danger" *ngIf="displayMessage.cpf">
+                            <p [innerHTML]="displayMessage.cpf"></p>
                         </span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Médico</label>
-                    <div class="col-md-10">
-                        <input class="form-control" id="nome" type="text" placeholder="Médico (requerido)" formControlName="Medico"
-                            [ngClass]="{'is-invalid': displayMessage.Medico }" />
-                        <span class="text-danger" *ngIf="displayMessage.Medico">
-                            <p [innerHTML]="displayMessage.Medico"></p>
+                    <label class="col-md-12 control-label">Médico</label>
+                    <div class="col-md-12">
+                        <input class="form-control" id="medico" type="text" placeholder="Médico (requerido)"
+                            formControlName="medico" [ngClass]="{'is-invalid': displayMessage.medico }" />
+                        <span class="text-danger" *ngIf="displayMessage.medico">
+                            <p [innerHTML]="displayMessage.medico"></p>
                         </span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Unidade</label>
-                    <div class="col-md-10">
-                        <input class="form-control" id="nome" type="text" placeholder="Unidade (requerido)" formControlName="Unidade"
-                            [ngClass]="{'is-invalid': displayMessage.Unidade }" />
-                        <span class="text-danger" *ngIf="displayMessage.Unidade">
-                            <p [innerHTML]="displayMessage.Unidade"></p>
+                    <label class="col-md-12 control-label">Unidade</label>
+                    <div class="col-md-12">
+                        <input class="form-control" id="unidade" type="text" placeholder="Unidade (requerido)"
+                            formControlName="unidade" [ngClass]="{'is-invalid': displayMessage.unidade }" />
+                        <span class="text-danger" *ngIf="displayMessage.unidade">
+                            <p [innerHTML]="displayMessage.unidade"></p>
                         </span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Consultório</label>
-                    <div class="col-md-10">
-                        <input class="form-control" id="nome" type="number" formControlName="Consultorio"
+                    <label class="col-md-12 control-label">Consultório</label>
+                    <div class="col-md-12">
+                        <input class="form-control" id="consultorio" type="number" formControlName="consultorio"
+                            placeholder="Consultório (requerido)"
                             [ngClass]="{'is-invalid': displayMessage.consultorio }" />
                         <span class="text-danger" *ngIf="displayMessage.consultorio">
                             <p [innerHTML]="displayMessage.consultorio"></p>
@@ -123,22 +133,38 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Data Consulta</label>
-                    <div class="col-md-10">
-                        <input class="form-control" id="nome" type="datetime" formControlName="DataConsulta"
-                            [ngClass]="{'is-invalid': displayMessage.DataConsulta }" />
-                        <span class="text-danger" *ngIf="displayMessage.DataConsulta">
-                            <p [innerHTML]="displayMessage.DataConsulta"></p>
+                    <label class="col-md-12 control-label">Data Consulta</label>
+                    <div class="input-group col-md-12">
+                        <input class="form-control col-md-10" id="data-consulta" type="text" formControlName="dataConsulta"
+                            placeholder="Data (requerido) Ex: 99/99/9999"
+                            [ngClass]="{'is-invalid': displayMessage.dataConsulta }" ngbDatepicker #d="ngbDatepicker" />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="d.toggle()"
+                                type="button"><i class="fa fa-calendar-alt"></i></button>
+                        </div>
+                        <span class="text-danger" *ngIf="displayMessage.dataConsulta">
+                            <p [innerHTML]="displayMessage.dataConsulta"></p>
                         </span>
                     </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <ngb-timepicker formControlName="horaConsulta" required></ngb-timepicker>
+                            <div *ngIf="displayMessage.dataConsulta" class="small form-text text-danger">
+                              <!-- <div *ngIf="horaConsulta.errors['required']">Select some time during lunchtime</div>
+                              <div *ngIf="ctrl.errors['tooLate']">Oh no, it's way too late</div>
+                              <div *ngIf="ctrl.errors['tooEarly']">It's a bit too early</div> -->
+                            </div>
+                          </div>
+                    </div>
+                    
                 </div>
-                
-                <button type="submit" class="btn btn-block">Salvar</button>
+
+                <button class="btn btn-block btn-success" id="salvar-consulta"
+                    type="submit">Salvar Consulta</button>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Confirmar</button>
-            <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close')">Cancelar</button>
+            <button type="button" class="btn btn-secondary btn-block" (click)="modal.dismiss('Close')">Cancelar</button>
         </div>
     </div>
 </ng-template>

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PPGM.BFF.Integracao.Models;
 using PPGM.BFF.Integracao.Services;
+using PPGM.Core.Communication;
 using PPGM.WebAPI.Core.Controllers;
 
 
@@ -31,7 +32,7 @@ namespace PPGM.BFF.Integracao.Controllers
             _usuarioService = usuarioService;
             _cache = cache;
         }
-        
+
         [HttpGet("integracao/consulta/{userId}")]
         public async Task<IActionResult> ObterConsultaUsuario(Guid userId)
         {
@@ -55,7 +56,7 @@ namespace PPGM.BFF.Integracao.Controllers
             return CustomResponse(jsonCache);
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("integracao/consulta")]
         public async Task<IActionResult> ObterConsulta()
         {
@@ -81,17 +82,25 @@ namespace PPGM.BFF.Integracao.Controllers
         [HttpPost("integracao/consulta")]
         public async Task<IActionResult> Adicionar(ConsultaDTO consulta)
         {
-             var result = await _sasciService.AdicionarConsulta(consulta);
-            _cache.RemoveCache(_cacheName);
-            return CustomResponse(result);
+            var verifica = await _sasciService.ExisteConsulta(consulta);
+            if(!verifica)
+            {
+                var result = await _sasciService.AdicionarConsulta(consulta);
+                _cache.RemoveCache(_cacheName);
+                return CustomResponse(result);
+            }
+
+            ResponseResult error = new ResponseResult();
+            error.Errors.Mensagens.Add("Horário já possui atendimento");
+            return CustomResponse(error);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("integracao/consulta/{id}")]
         public async Task<IActionResult> Remover(int id)
         {
-            var result = await _sasciService.RemoverConsulta(id);
             _cache.RemoveCache(_cacheName);
+            var result = await _sasciService.RemoverConsulta(id);
             return CustomResponse(result);
         }
 

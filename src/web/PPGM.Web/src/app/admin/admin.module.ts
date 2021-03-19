@@ -14,6 +14,9 @@ import { AdminService } from './services/admin.service';
 import { CustomFormsModule } from 'ngx-custom-validators'
 import { AdminGuard } from './services/admin.guard';
 import { ConsultaComponent } from './consulta/consulta.component';
+import { NgbModule, NgbDatepickerI18n, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { I18n, CustomDatepickerI18n } from "src/app/providers/custom-datepicker-I18n";
+import { NgbDatePTParserFormatter } from "src/app/providers/ngb-dateptbr-parser";
 
 @NgModule({
   declarations: [
@@ -29,11 +32,15 @@ import { ConsultaComponent } from './consulta/consulta.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CustomFormsModule
+    CustomFormsModule,
+    NgbModule    
+    
   ],
   providers: [
     AdminService,
-    AdminGuard
+    AdminGuard,
+    [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
+    [{provide: NgbDateParserFormatter, useClass: NgbDatePTParserFormatter}],
   ]
 })
 export class AdminModule { }
