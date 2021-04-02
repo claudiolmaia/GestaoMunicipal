@@ -22,10 +22,10 @@ export class ListaComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    if(!this.cidadaoService.LocalStorage.usuarioLogado()) {
-      this.toastr.warning('Acesso apenas para usuários autenticados!', 'Alerta');
-      this.router.navigate(["/conta/login"]);
-    }
+    // if(!this.cidadaoService.LocalStorage.usuarioLogado()) {
+    //   this.toastr.warning('Acesso apenas para usuários autenticados!', 'Alerta');
+    //   this.router.navigate(["/conta/login"]);
+    // }
   }
   
 }

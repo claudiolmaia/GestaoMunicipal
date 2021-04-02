@@ -12,8 +12,8 @@ services:
         volumes: 
             - dpkeys:/var/data_protection_keys/         
         ports:
-            - "80:80"
-            - "443:443"        
+            - "8085:80"
+            - "4443:443"        
 
     
 volumes:

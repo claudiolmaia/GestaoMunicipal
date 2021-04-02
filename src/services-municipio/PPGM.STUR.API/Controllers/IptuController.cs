@@ -21,10 +21,16 @@ namespace PPGM.STUR.API.Controllers
             return await _iptuRepository.ObterTodosAbertos();
         }
 
-        [HttpGet("iptu/{cpf}")]
+        [HttpGet("iptu/cpf/{cpf}")]
         public async Task<List<Iptu>> ObterPorCpf(string cpf)
         {
             return await _iptuRepository.ObterPorCpf(cpf);
+        }
+
+        [HttpGet("iptu/{id}")]
+        public async Task<Iptu> ObterPorID(int id)
+        {
+            return await _iptuRepository.ObterPorId(id);
         }
 
         [HttpPut("iptu/{id}")]

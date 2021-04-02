@@ -19,6 +19,12 @@ a.navbar-brand {
   -------------------------------------------------- */
 
 html {
+    background: url('/assets/bom-sucesso.jpg') no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
     font-size: 14px;
 }
 
@@ -56,17 +62,18 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .footer {
+    background-color: #FFF;
     position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
     /* Set the fixed height of the footer here */
-    height: 60px;
-    line-height: 60px;
+    height: 50px;
+    line-height: 48px;
     /* Vertically center the text there */
 }
 

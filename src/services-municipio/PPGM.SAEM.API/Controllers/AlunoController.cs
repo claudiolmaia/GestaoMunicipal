@@ -22,12 +22,6 @@ namespace PPGM.SASCI.API.Controllers
             return await _alunoRepository.ObterTodos();
         }
 
-        [HttpGet("aluno/{id}")]
-        public async Task<Aluno> ObterPorId(int id)
-        {
-            return await _alunoRepository.ObterPorId(id);
-        }
-
         [HttpGet("aluno/{cpf}")]
         public async Task<Aluno> ObterPorCpf(string cpf)
         {

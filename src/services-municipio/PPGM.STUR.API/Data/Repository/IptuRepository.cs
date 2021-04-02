@@ -16,7 +16,13 @@ namespace PPGM.STUR.API.Data.Repository
         {
             _context = context;
         }
-        
+
+        public async Task<Iptu> ObterPorId(int ID)
+        {
+            var result = await _context.iptu.Where(x => x.Id == ID).FirstAsync();
+            return result;
+        }
+
         public async Task<List<Iptu>> ObterPorCpf(string cpf)
         {
             var result = await _context.iptu.Where(x => x.CPF == cpf).ToListAsync();

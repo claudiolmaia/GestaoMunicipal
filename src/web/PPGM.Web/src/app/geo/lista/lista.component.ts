@@ -51,7 +51,7 @@ export class ListaComponent implements OnInit {
   processarSucesso(res: any, fileName: string) {    
     var link = document.createElement("a");
     link.download = `${fileName}.json`;
-    var data = "text/json;charset=utf-8," + encodeURIComponent(res);
+    var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(res));
     link.href = "data:" + data;
     link.click();
   }

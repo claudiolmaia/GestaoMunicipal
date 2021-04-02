@@ -79,5 +79,16 @@ namespace PPGM.BFF.Integracao.Controllers
 
             return CustomResponse(result);
         }
+
+        //[Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        [HttpGet("integracao/iptu/pdf/{id}")]
+        public async Task<IActionResult> IptuPDF(int id)
+        {
+            var result = await _sturService.GerarPDF(id);
+            _cache.RemoveCache(_cacheName);
+
+            return CustomResponse(result);
+        }
     }
 }

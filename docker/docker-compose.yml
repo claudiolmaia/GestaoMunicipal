@@ -5,6 +5,7 @@ services:
     rabbitmq:
         image: rabbitmq:3-management
         container_name: ppgm-rabbitmq
+        restart: always
         environment:
             RABBITMQ_DEFAULT_USER: "ppgm"
             RABBITMQ_DEFAULT_PASS: "ppgm"
@@ -18,7 +19,7 @@ services:
         build: 
             context: ../src
             dockerfile: ./services/PPGM.Autenticacao.API/Dockerfile  
-        restart: always    
+        restart: always
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
             - ASPNETCORE_URLS=https://+:5101;http://+5102
@@ -171,21 +172,21 @@ services:
         depends_on:
             - api-bff-integracao
 
-    # ppgm-web:
-    #     image: ppgm/web:latest
-    #     container_name: ppgm-web
-    #     build:
-    #         context: ../src/web/PPGM.Web/
-    #         dockerfile: ./Dockerfile
-    #     restart: always
-    #     volumes: 
-    #         - dpkeys:/var/data_protection_keys/         
-    #     ports:
-    #         - "80:80"
-    #         - "443:443"
-    #     depends_on:
-    #         - api-auth
-    #         - api-usuario            
+    ppgm-web:
+        image: ppgm/web:latest
+        container_name: ppgm-web
+        build:
+            context: ../src/web/PPGM.Web/
+            dockerfile: ./Dockerfile
+        restart: always
+        volumes: 
+            - dpkeys:/var/data_protection_keys/         
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on:
+            - api-auth
+            - api-usuario            
 
     
 volumes:
