@@ -18,6 +18,13 @@ export class CidadaoService extends BaseService {
             .pipe(catchError(super.serviceError));
     }
 
+    obterPDFIptu(id: number): Observable<Blob> {
+        
+        return this.http
+            .get<Blob>(`${this.UrlIntegracaoV1}integracao/iptu/pdf/${id}`, super.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
     obterConsultaPorCidadao(): Observable<Consulta[]> {
         
         return this.http

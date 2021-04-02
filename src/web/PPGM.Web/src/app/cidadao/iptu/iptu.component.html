@@ -37,10 +37,12 @@
                     <!-- <input [checked]="iptu.IsPago" class="check-box" disabled="disabled" type="checkbox"> -->
                 </td>
                 <td class="text-right" *ngIf="!iptu.IsPago">
+                    
+                    <button class="btn btn-primary" (click)="DownloadPDF(iptu.Id)"><i class="fa fa-print"></i></button>
                     <!-- <a class="btn btn-info" [routerLink]="['/cidadao/iptu/iptu-detalhe',iptu.Id]"> -->
-                    <a class="btn btn-info" [routerLink]="['/cidadao/iptu']">
+                    <!-- <a class="btn btn-info" [routerLink]="['/cidadao/iptu']">
                         <span class="fa fa-print"></span>
-                    </a>&nbsp;                    
+                    </a>&nbsp;                     -->
                 </td>
             </tr>
         </tbody>

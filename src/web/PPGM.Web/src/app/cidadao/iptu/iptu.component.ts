@@ -34,4 +34,28 @@ export class IptuComponent implements OnInit {
     this.toastr.error('Ocorreu um erro!', 'Erro');
   }
 
+   DownloadPDF(Id){
+    this.cidadaoService.obterPDFIptu(Id)
+    .subscribe((x) =>
+      {
+        if(x) {
+          var link = document.createElement("a");
+          link.download = `IPTU.pdf`;
+          var data = "application/pdf;charset=utf-8," + x;
+          link.href = "data:" + data;
+          link.click();
+        }
+          
+      },
+      error => {this.processarFalha(error)});
+  }
+
+  GerarPdf(res: any, fileName: string) {    
+    var link = document.createElement("a");
+    link.download = `${fileName}.json`;
+    var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(res));
+    link.href = "data:" + data;
+    link.click();
+  }
+
 }
