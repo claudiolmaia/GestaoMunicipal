@@ -14,7 +14,19 @@ namespace PPGM.BFF.Integracao
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                Log.Information("Iniciando a aplicação...");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Erro lançado pela aplicação.");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

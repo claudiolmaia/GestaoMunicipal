@@ -17,6 +17,7 @@ namespace PPGM.BFF.Integracao.Services
     {
         Task<List<IptuDTO>> ObterIptuPorCpf(string cpf);
         Task<List<IptuDTO>> ObterTodos();
+        Task<IptuDTO> ObterPorId(int id);
         Task<bool> Baixar(int id);
         Task<byte[]> GerarPDF(int id);
     }
@@ -57,6 +58,15 @@ namespace PPGM.BFF.Integracao.Services
             TratarErrosResponse(response);
 
             return await DeserializarObjetoResponse<bool>(response);
+        }
+
+        public async Task<IptuDTO> ObterPorId(int id)
+        {
+            var responseIptu = await _httpClient.GetAsync($"/iptu/{id}");
+
+            TratarErrosResponse(responseIptu);
+
+            return await DeserializarObjetoResponse<IptuDTO>(responseIptu);
         }
 
         public async Task<byte[]> GerarPDF(int id)

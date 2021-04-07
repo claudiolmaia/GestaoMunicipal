@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-
 import { Iptu } from '../models/iptu';
 
 @Component({

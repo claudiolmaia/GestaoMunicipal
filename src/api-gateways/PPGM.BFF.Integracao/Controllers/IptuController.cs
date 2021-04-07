@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PPGM.BFF.Integracao.Services;
 using PPGM.WebAPI.Core.Controllers;
 using System;
@@ -17,14 +18,17 @@ namespace PPGM.BFF.Integracao.Controllers
         private readonly ISturService _sturService;
         private readonly IUsuarioService _usuarioService;
         private readonly string _cacheName = "iptu";
+        private readonly ILogger<IptuController> _logger;
 
         public IptuController(ICacheService cache,
             ISturService sturService,
-            IUsuarioService usuarioService)
+            IUsuarioService usuarioService,
+            ILogger<IptuController> logger)
         {
             _cache = cache;
             _sturService = sturService;
             _usuarioService = usuarioService;
+            _logger = logger;
         }
 
         [HttpGet("integracao/iptu/{userId}")]
@@ -81,11 +85,12 @@ namespace PPGM.BFF.Integracao.Controllers
         }
 
         //[Authorize(Roles = "Admin")]
-        [AllowAnonymous]
-        [HttpGet("integracao/iptu/pdf/{id}")]
-        public async Task<IActionResult> IptuPDF(int id)
+
+        [HttpGet("integracao/iptu/id/{id}")]
+        public async Task<IActionResult> IptuPorId(int id)
         {
-            var result = await _sturService.GerarPDF(id);
+
+            var result = await _sturService.ObterPorId(id);
             _cache.RemoveCache(_cacheName);
 
             return CustomResponse(result);
