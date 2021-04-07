@@ -1,16 +1,2 @@
 {
-  "/api/*": {
-    "target": "https://ppgm-api-autenticacao:5101/api",
-    "secure": false,
-    "logLevel": "debug",
-    "changeOrigin": true,
-    "pathRewrite": {"^/api" : ""}
-  },
-  "/api-integracao/*": {
-    "target": "https://ppgm-api-integracao:5901/api",
-    "secure": false,
-    "logLevel": "debug",
-    "changeOrigin": true,
-    "pathRewrite": {"^/api" : ""}
-  }
 }

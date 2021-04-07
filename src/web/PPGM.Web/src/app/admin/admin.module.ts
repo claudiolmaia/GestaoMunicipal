@@ -17,6 +17,7 @@ import { ConsultaComponent } from './consulta/consulta.component';
 import { NgbModule, NgbDatepickerI18n, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { I18n, CustomDatepickerI18n } from "src/app/providers/custom-datepicker-I18n";
 import { NgbDatePTParserFormatter } from "src/app/providers/ngb-dateptbr-parser";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NgbDatePTParserFormatter } from "src/app/providers/ngb-dateptbr-parser"
     ReactiveFormsModule,
     HttpClientModule,
     CustomFormsModule,
-    NgbModule    
+    NgbModule,
+    NgxSpinnerModule
     
   ],
   providers: [

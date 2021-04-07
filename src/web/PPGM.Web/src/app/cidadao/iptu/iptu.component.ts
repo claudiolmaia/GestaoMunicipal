@@ -3,6 +3,7 @@ import { CidadaoService } from '../services/cidadao.service';
 import { environment } from 'src/environments/environment';
 import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { Iptu } from '../models/iptu';
 
@@ -19,43 +20,43 @@ export class IptuComponent implements OnInit {
 
   constructor(private cidadaoService: CidadaoService, 
     private router: Router,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     // let user = this.cidadaoService.LocalStorage.obterUsuario();
     // let id = user.claims.find(e=> e.type == 'sub')?.value;
     this.cidadaoService.obterIptuPorCidadao()
       .subscribe(
         iptus => this.iptus = iptus,
         error => {this.processarFalha(error)});
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
   }
 
   processarFalha(fail: any){
     this.toastr.error('Ocorreu um erro!', 'Erro');
+    this.spinner.hide();
   }
 
    DownloadPDF(Id){
+     this.spinner.show();
     this.cidadaoService.obterPDFIptu(Id)
     .subscribe((x) =>
       {
         if(x) {
-          var link = document.createElement("a");
-          link.download = `IPTU.pdf`;
-          var data = "application/pdf;charset=utf-8," + x;
-          link.href = "data:" + data;
+          let link = document.createElement("a");
+          link.download = 'IPTU.pdf';          
+          const data = 'data:application/pdf;base64,' + x;
+          link.href = data;
           link.click();
         }
-          
+        this.spinner.hide();
       },
       error => {this.processarFalha(error)});
-  }
-
-  GerarPdf(res: any, fileName: string) {    
-    var link = document.createElement("a");
-    link.download = `${fileName}.json`;
-    var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(res));
-    link.href = "data:" + data;
-    link.click();
   }
 
 }

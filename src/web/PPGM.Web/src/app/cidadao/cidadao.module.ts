@@ -12,6 +12,7 @@ import { CidadaoRoutingModule } from './cidadao.route';
 import { CidadaoService } from './services/cidadao.service';
 
 import { CustomFormsModule } from 'ngx-custom-validators'
+import { NgxSpinnerModule } from "ngx-spinner";
 import { CidadaoGuard } from './services/cidadao.guard';
 import { ConsultaComponent } from './consulta/consulta.component';
 
@@ -29,7 +30,8 @@ import { ConsultaComponent } from './consulta/consulta.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CustomFormsModule
+    CustomFormsModule,
+    NgxSpinnerModule
   ],
   providers: [
     CidadaoService,

@@ -28,12 +28,7 @@ const routes: Routes = [
     path: 'geo',
     loadChildren: () => import('./geo/geo.module')
       .then(m => m.GeoModule)
-  },
-  {
-    path: 'produtos',
-    loadChildren: () => import('./produto/produto.module')
-      .then(m => m.ProdutoModule)
-  },
+  },  
   { path: 'acesso-negado', component: AcessoNegadoComponent },
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }

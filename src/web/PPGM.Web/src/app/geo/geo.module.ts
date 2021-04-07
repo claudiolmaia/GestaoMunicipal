@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomFormsModule } from 'ngx-custom-validators'
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { GeoAppComponent } from './geo.app.component';
 import { ListaComponent } from './lista/lista.component';
@@ -26,7 +27,8 @@ import { GeoGuard } from './services/geo.guard';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CustomFormsModule
+    CustomFormsModule,
+    NgxSpinnerModule
   ],
   providers: [
     GeoService,

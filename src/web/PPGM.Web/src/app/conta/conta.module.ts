@@ -12,6 +12,7 @@ import { ContaRoutingModule } from './conta.route';
 import { ContaService } from './services/conta.service';
 
 import { CustomFormsModule } from 'ngx-custom-validators'
+import { NgxSpinnerModule } from "ngx-spinner";
 import { ContaGuard } from './services/conta.guard';
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ContaGuard } from './services/conta.guard';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CustomFormsModule
+    CustomFormsModule,
+    NgxSpinnerModule
   ],
   providers: [
     ContaService,
