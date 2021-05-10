@@ -23,9 +23,6 @@ services:
             dockerfile: ./Dockerfile
         environment:
             MYSQL_ROOT_PASSWORD: "@ppgm2021"
-            # MYSQL_DATABASE: PPGM
-            # MYSQL_USER: "sa"
-            # MYSQL_PASSWORD: "@ppgm2021"
         restart: always
         ports: 
             - "3306:3306"
